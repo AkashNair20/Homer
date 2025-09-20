@@ -58,7 +58,8 @@
     .reveal.show { opacity: 1; transform: none; }
     .reveal-zoom { opacity: 0; transform: scale(.94); transition: opacity .8s ease, transform .8s cubic-bezier(.22,.9,.22,1); transition-delay: var(--d, 0ms); }
     .reveal-zoom.show { opacity: 1; transform: none; }
-    @keyframes blobFloat { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(20px,-20px,0) scale(1.05); } 100% { transform: translate3d(0,0,0) scale(1); } }
+    @keyframes blobFloat { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(20px,-20px,0) scale(1.05); } 100% { transform: translate3d(0,0,0) scale(1); }
+    }
     @keyframes glowPulse { 0%,100% { opacity:.55; } 50% { opacity:.75; } }
     .blob { animation: blobFloat 12s ease-in-out infinite; }
     .glow { animation: glowPulse 6s ease-in-out infinite; }
@@ -75,10 +76,8 @@
       <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
         <a href="#features" class="hover:text-brand-700">Features</a>
         <a href="#how" class="hover:text-brand-700">How it works</a>
-        <a href="#pricing" class="hover:text-brand-700">Pricing</a>
         <a href="#faq" class="hover:text-brand-700">FAQ</a>
         <a href="affiliate.html" class="hover:text-brand-700">Affiliate</a>
-        <a href="#contact" class="px-3 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800">Get Started</a>
       </div>
     </nav>
   </header>
@@ -101,8 +100,7 @@
           Homer turns every on‑time rent payment into momentum. Build a powerful <strong>Homer Score</strong>, unlock trust with owners, and keep your housing journey moving forward.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#contact" class="btn-primary">Start in minutes</a>
-          <a href="#demo" class="btn-secondary">See demo</a>
+          <a href="#features" class="btn-primary">Start in minutes</a>
         </div>
         <p class="mt-3 text-[11px] text-slate-500 tracking-wide font-tech">PCI‑compliant • UPI/Razorpay • No lock‑in</p>
       </div>
@@ -219,67 +217,6 @@
     </div>
   </section>
 
-  <!-- Demo CTA (full width) -->
-  <section id="demo" class="py-20 bg-gradient-to-r from-brand-50 to-brand-100">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-4xl md:text-5xl font-black">Try the web preview</h2>
-      <p class="mt-3 text-slate-700 max-w-2xl mx-auto text-lg">No installs. No credit card. Just rent, paid.</p>
-      <div class="mt-6 flex items-center justify-center gap-3 reveal" style="--d:120ms">
-        <a href="#contact" class="px-6 py-3 rounded-2xl bg-sky-600 text-white font-semibold shadow hover:shadow-lg transition">Request Demo Link</a>
-        <a href="#faq" class="px-6 py-3 rounded-2xl bg-white border-2 border-slate-300 font-semibold hover:border-slate-400">Questions?</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="py-20 md:py-28 bg-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <h2 class="text-4xl md:text-5xl font-black">Simple, transparent pricing</h2>
-        <p class="mt-3 text-slate-600 text-lg">Only pay when you pay rent. No hidden fees.</p>
-      </div>
-      <div class="mt-12 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms">
-          <h3 class="font-extrabold text-xl">Tenants</h3>
-          <p class="mt-2 text-sm text-slate-600">Pay‑as‑you‑go</p>
-          <div class="mt-4 text-5xl font-black">0.98%<span class="text-base font-semibold text-slate-500"> per rent</span></div>
-          <ul class="mt-4 space-y-2 text-sm text-slate-700">
-            <li>• UPI/Card via Razorpay</li>
-            <li>• Homer Score</li>
-            <li>• Receipts & history</li>
-            <li>• Tenant/Owner reviews</li>
-          </ul>
-          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold">Start now</a>
-        </div>
-        <div class="rounded-3xl border-2 border-sky-600 bg-gradient-to-b from-sky-50 to-white p-7 shadow-sm reveal" style="--d:160ms">
-          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Most Popular</div>
-          <h3 class="mt-2 font-extrabold text-xl">Societies / PG / Coliving</h3>
-          <p class="mt-2 text-sm text-slate-600">White‑label Homer</p>
-          <div class="mt-4 text-4xl font-black">₹10–₹30<span class="text-base font-semibold text-slate-500"> / door / month</span></div>
-          <ul class="mt-4 space-y-2 text-sm text-slate-700">
-            <li>• Admin dashboard</li>
-            <li>• Bulk reminders</li>
-            <li>• Reports & exports</li>
-            <li>• Support SLA</li>
-          </ul>
-          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-sky-600 text-white font-semibold">Talk to sales</a>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:240ms">
-          <h3 class="font-extrabold text-xl">Owners/Brokers</h3>
-          <p class="mt-2 text-sm text-slate-600">Verify fast</p>
-          <div class="mt-4 text-4xl font-black">Free<span class="text-base font-semibold text-slate-500"> to verify</span></div>
-          <ul class="mt-4 space-y-2 text-sm text-slate-700">
-            <li>• View Homer Scores</li>
-            <li>• Verify payment history</li>
-            <li>• Request references</li>
-            <li>• Manage listings</li>
-          </ul>
-          <a href="affiliate.html" class="mt-6 inline-block px-4 py-2 rounded-xl bg-white border-2 border-slate-300 font-semibold">Join Affiliate</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section id="faq" class="py-20 md:py-28 bg-sky-50/60">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -289,26 +226,6 @@
         <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><h3 class="font-extrabold">What is Homer Score?</h3><p class="mt-2 text-sm text-slate-600">A weighted score of on‑time vs late vs missed rent payments. Sharing it helps owners quickly trust your profile.</p></div>
         <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><h3 class="font-extrabold">Are my payments secure?</h3><p class="mt-2 text-sm text-slate-600">Yes. We use PCI‑compliant processors and never store sensitive card/UPI credentials on our servers.</p></div>
         <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><h3 class="font-extrabold">Can owners see my data?</h3><p class="mt-2 text-sm text-slate-600">Only what you choose to share—like your score, payment streak, and reviews.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-20">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h2 class="text-3xl md:text-4xl font-black">Get early access</h2>
-        <p class="mt-2 text-slate-600 text-lg">Tell us a bit about you and we’ll send the demo link + onboarding steps.</p>
-        <form class="mt-6 grid gap-4" action="#" method="post" onsubmit="alert('Thanks! We\'ll get back to you soon.'); return false;">
-          <div class="grid md:grid-cols-2 gap-4">
-            <input class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full name" name="name" required />
-            <input class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email" name="email" type="email" required />
-          </div>
-          <input class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Phone (WhatsApp)" name="phone" />
-          <textarea class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" rows="4" placeholder="Tell us about your use case (tenant / owner / PG/coliving / broker)" name="usecase"></textarea>
-          <button class="justify-self-start px-6 py-3 rounded-2xl bg-slate-900 text-white font-semibold">Request access</button>
-          <p class="text-xs text-slate-500">By continuing you agree to our <a href="#" class="underline">Terms</a> and <a href="#" class="underline">Privacy Policy</a>.</p>
-        </form>
       </div>
     </div>
   </section>
@@ -323,9 +240,7 @@
         </div>
         <ul class="text-sm text-slate-600 grid sm:grid-cols-3 gap-x-6 gap-y-2">
           <li><a class="hover:text-brand-700" href="#features">Features</a></li>
-          <li><a class="hover:text-brand-700" href="#pricing">Pricing</a></li>
           <li><a class="hover:text-brand-700" href="#faq">FAQ</a></li>
-          <li><a class="hover:text-brand-700" href="#contact">Contact</a></li>
           <li><a class="hover:text-brand-700" href="affiliate.html">Affiliate</a></li>
           <li><a class="hover:text-brand-700" href="#">Privacy</a></li>
         </ul>

@@ -52,11 +52,21 @@
     .btn-secondary { @apply px-7 py-3 rounded-2xl bg-white border-2 border-slate-300 font-semibold hover:border-slate-400; }
     .chip { @apply inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-sky-900 bg-sky-100 px-3 py-1 rounded-full; }
     .section-title { @apply font-display text-4xl md:text-5xl font-black; }
+
+    /* ===== Animations ===== */
+    .reveal { opacity: 0; transform: translateY(14px) scale(.98); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.9,.22,1); transition-delay: var(--d, 0ms); }
+    .reveal.show { opacity: 1; transform: none; }
+    .reveal-zoom { opacity: 0; transform: scale(.94); transition: opacity .8s ease, transform .8s cubic-bezier(.22,.9,.22,1); transition-delay: var(--d, 0ms); }
+    .reveal-zoom.show { opacity: 1; transform: none; }
+    @keyframes blobFloat { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(20px,-20px,0) scale(1.05); } 100% { transform: translate3d(0,0,0) scale(1); } }
+    @keyframes glowPulse { 0%,100% { opacity:.55; } 50% { opacity:.75; } }
+    .blob { animation: blobFloat 12s ease-in-out infinite; }
+    .glow { animation: glowPulse 6s ease-in-out infinite; }
   </style>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-white via-sky-50 to-white text-slate-900 font-ui">
+<body class="min-h-screen bg-[#0b1530] text-slate-900 font-ui">
   <!-- Navbar -->
-  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/60 border-b border-slate-200/60">
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-[#0b1530]/70 bg-[#0b1530]/70 border-b border-slate-700">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="#home" class="flex items-center gap-2 font-black tracking-tight text-xl">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-600"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
@@ -76,28 +86,28 @@
   <!-- Hero (full-screen, bolder/optimistic) -->
   <section id="home" class="relative overflow-hidden min-h-[92vh] flex items-center">
   <div class="absolute inset-0">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-100 via-white to-white"></div>
-    <div class="absolute -left-24 -top-24 w-[700px] h-[700px] bg-gradient-to-br from-sky-200 via-brand-200 to-blue-200 rounded-full blur-3xl opacity-70"></div>
-    <div class="absolute -right-32 bottom-0 w-[800px] h-[800px] bg-gradient-to-br from-indigo-100 via-sky-200 to-cyan-200 rounded-full blur-3xl opacity-60"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-800 via-brand-900 to-brand-900"></div>
+    <div class="absolute -left-24 -top-24 w-[700px] h-[700px] bg-gradient-to-br from-sky-400/20 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl opacity-70 blob"></div>
+    <div class="absolute -right-32 bottom-0 w-[800px] h-[800px] bg-gradient-to-br from-indigo-400/20 via-sky-500/20 to-cyan-400/20 rounded-full blur-3xl opacity-60 blob" style="animation-delay: -4s"></div>
   </div>
   <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16 w-full">
     <div class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <span class="chip">The new way to rent</span>
+      <div class="reveal text-white/95" style="--d:100ms">
+        <span class="chip bg-sky-200/20 text-sky-100 ring-1 ring-white/10">The new way to rent</span>
         <h1 class="mt-4 text-5xl md:text-7xl font-black leading-[1.02] font-display">
-          Pay. Prove. <span class="bg-gradient-to-r from-sky-700 via-blue-700 to-indigo-700 bg-clip-text text-transparent">Progress.</span>
+          Pay. Prove. <span class="bg-gradient-to-r from-sky-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent">Progress.</span>
         </h1>
-        <p class="mt-5 text-lg md:text-xl text-slate-700 max-w-xl">
+        <p class="mt-5 text-lg md:text-xl text-white/80 max-w-xl">
           Homer turns every on‑time rent payment into momentum. Build a powerful <strong>Homer Score</strong>, unlock trust with owners, and keep your housing journey moving forward.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href="#contact" class="btn-primary">Start in minutes</a>
           <a href="#demo" class="btn-secondary">See demo</a>
         </div>
-        <p class="mt-3 text-[11px] text-slate-500 tracking-wide font-tech">PCI‑compliant • UPI/Razorpay • No lock‑in</p>
+        <p class="mt-3 text-[11px] text-white/60 tracking-wide font-tech">PCI‑compliant • UPI/Razorpay • No lock‑in</p>
       </div>
-      <div class="relative">
-        <div class="rounded-3xl border border-slate-200 shadow-2xl bg-white p-4 md:p-6">
+      <div class="relative reveal-zoom" style="--d:240ms">
+        <div class="rounded-3xl border border-slate-200/70 shadow-2xl bg-white/95 p-4 md:p-6 backdrop-blur">
           <div class="aspect-[9/18] w-full rounded-2xl bg-gradient-to-b from-sky-100 via-white to-white flex items-center justify-center">
             <!-- Phone mock -->
             <div class="w-[290px] h-[580px] rounded-[36px] border-[10px] border-slate-900 bg-white shadow-2xl relative overflow-hidden">
@@ -139,50 +149,50 @@
   </section>
 
   <!-- Features (bolder language) -->
-  <section id="features" class="py-24 md:py-28 bg-white">
+  <section id="features" class="py-24 md:py-28 bg-white">>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl">
       <h2 class="section-title">Everything you need to win renting</h2>
       <p class="mt-3 text-slate-600 text-lg">Lightning‑fast payments. A score owners respect. Zero drama.</p>
     </div>
     <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- card -->
-      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition">
+      <!-- cards with stagger -->
+      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal" style="--d:80ms">
         <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M2 6h20v12H2z"/><path d="M4 10h6v2H4z" fill="white"/></svg>
         </div>
         <h3 class="mt-4 font-extrabold text-xl font-display">One‑tap rent</h3>
         <p class="mt-1 text-slate-600">UPI/Card with Razorpay. Reminders, receipts, GST invoices—done.</p>
       </div>
-      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-blue-50 p-7 shadow-sm hover:shadow-lg transition">
+      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-blue-50 p-7 shadow-sm hover:shadow-lg transition reveal" style="--d:160ms">
         <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7-10 5 10 5 10-5-10-5z"/></svg>
         </div>
         <h3 class="mt-4 font-extrabold text-xl font-display">Homer Score</h3>
         <p class="mt-1 text-slate-600">Prove reliability. Beat the queue. Get the house you want.</p>
       </div>
-      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-indigo-50 p-7 shadow-sm hover:shadow-lg transition">
+      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-indigo-50 p-7 shadow-sm hover:shadow-lg transition reveal" style="--d:240ms">
         <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M2 4h20v12H6l-4 4z"/></svg>
         </div>
         <h3 class="mt-4 font-extrabold text-xl font-display">Mutual reviews</h3>
         <p class="mt-1 text-slate-600">Transparency both ways. Good tenants and good owners find each other.</p>
       </div>
-      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-cyan-50 p-7 shadow-sm hover:shadow-lg transition">
+      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-cyan-50 p-7 shadow-sm hover:shadow-lg transition reveal" style="--d:320ms">
         <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M12 2a7 7 0 0 0-7 7v5l-2 2h18l-2-2V9a7 7 0 0 0-7-7zM9 20h6v2H9z"/></svg>
         </div>
         <h3 class="mt-4 font-extrabold text-xl font-display">Smart nudges</h3>
         <p class="mt-1 text-slate-600">WhatsApp/email reminders so you never miss a due date.</p>
       </div>
-      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition">
+      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal" style="--d:400ms">
         <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M3 13h8V3H3v10zm10 8h8V3h-8v18z"/></svg>
         </div>
         <h3 class="mt-4 font-extrabold text-xl font-display">Owner dashboard</h3>
         <p class="mt-1 text-slate-600">Verify scores, track payments, manage tenants with ease.</p>
       </div>
-      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-blue-50 p-7 shadow-sm hover:shadow-lg transition">
+      <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-blue-50 p-7 shadow-sm hover:shadow-lg transition reveal" style="--d:480ms">
         <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M3 11 12 4l9 7v9H3z"/></svg>
         </div>
@@ -201,10 +211,10 @@
         <p class="mt-3 text-slate-600 text-lg">Create account, pay safely, share your score. That’s it.</p>
       </div>
       <ol class="mt-12 grid md:grid-cols-4 gap-6">
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div class="text-slate-400 font-black">01</div><h3 class="mt-2 font-extrabold">Create account</h3><p class="mt-1 text-sm text-slate-600">Phone + OTP. Add your property and due date.</p></li>
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div class="text-slate-400 font-black">02</div><h3 class="mt-2 font-extrabold">Pay securely</h3><p class="mt-1 text-sm text-slate-600">UPI/Card via Razorpay. Receipts & invoices generated.</p></li>
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div class="text-slate-400 font-black">03</div><h3 class="mt-2 font-extrabold">Get Homer Score</h3><p class="mt-1 text-sm text-slate-600">Your reliability grows—and so do your options.</p></li>
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div class="text-slate-400 font-black">04</div><h3 class="mt-2 font-extrabold">Share & move</h3><p class="mt-1 text-sm text-slate-600">Show owners your score. Get approved faster.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms"><div class="text-slate-400 font-black">01</div><h3 class="mt-2 font-extrabold">Create account</h3><p class="mt-1 text-sm text-slate-600">Phone + OTP. Add your property and due date.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:160ms"><div class="text-slate-400 font-black">02</div><h3 class="mt-2 font-extrabold">Pay securely</h3><p class="mt-1 text-sm text-slate-600">UPI/Card via Razorpay. Receipts & invoices generated.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:240ms"><div class="text-slate-400 font-black">03</div><h3 class="mt-2 font-extrabold">Get Homer Score</h3><p class="mt-1 text-sm text-slate-600">Your reliability grows—and so do your options.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:320ms"><div class="text-slate-400 font-black">04</div><h3 class="mt-2 font-extrabold">Share & move</h3><p class="mt-1 text-sm text-slate-600">Show owners your score. Get approved faster.</p></li>
       </ol>
     </div>
   </section>
@@ -214,7 +224,7 @@
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-4xl md:text-5xl font-black">Try the web preview</h2>
       <p class="mt-3 text-slate-700 max-w-2xl mx-auto text-lg">No installs. No credit card. Just rent, paid.</p>
-      <div class="mt-6 flex items-center justify-center gap-3">
+      <div class="mt-6 flex items-center justify-center gap-3 reveal" style="--d:120ms">
         <a href="#contact" class="px-6 py-3 rounded-2xl bg-sky-600 text-white font-semibold shadow hover:shadow-lg transition">Request Demo Link</a>
         <a href="#faq" class="px-6 py-3 rounded-2xl bg-white border-2 border-slate-300 font-semibold hover:border-slate-400">Questions?</a>
       </div>
@@ -229,7 +239,7 @@
         <p class="mt-3 text-slate-600 text-lg">Only pay when you pay rent. No hidden fees.</p>
       </div>
       <div class="mt-12 grid md:grid-cols-3 gap-6">
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms">
           <h3 class="font-extrabold text-xl">Tenants</h3>
           <p class="mt-2 text-sm text-slate-600">Pay‑as‑you‑go</p>
           <div class="mt-4 text-5xl font-black">0.98%<span class="text-base font-semibold text-slate-500"> per rent</span></div>
@@ -241,7 +251,7 @@
           </ul>
           <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold">Start now</a>
         </div>
-        <div class="rounded-3xl border-2 border-sky-600 bg-gradient-to-b from-sky-50 to-white p-7 shadow-sm">
+        <div class="rounded-3xl border-2 border-sky-600 bg-gradient-to-b from-sky-50 to-white p-7 shadow-sm reveal" style="--d:160ms">
           <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Most Popular</div>
           <h3 class="mt-2 font-extrabold text-xl">Societies / PG / Coliving</h3>
           <p class="mt-2 text-sm text-slate-600">White‑label Homer</p>
@@ -254,7 +264,7 @@
           </ul>
           <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-sky-600 text-white font-semibold">Talk to sales</a>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:240ms">
           <h3 class="font-extrabold text-xl">Owners/Brokers</h3>
           <p class="mt-2 text-sm text-slate-600">Verify fast</p>
           <div class="mt-4 text-4xl font-black">Free<span class="text-base font-semibold text-slate-500"> to verify</span></div>
@@ -326,6 +336,21 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    // Intersection Observer for reveal/stagger
+    const IO = new IntersectionObserver((els)=>{
+      els.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          IO.unobserve(e.target);
+        }
+      })
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal, .reveal-zoom').forEach((el,i)=>{
+      if(!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (80 + i*60)+'ms');
+      IO.observe(el);
+    });
   </script>
 </body>
 </html>

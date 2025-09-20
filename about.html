@@ -1,563 +1,303 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Homer — Home Rent Payments</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
-
-    :root{
-      --ink:#0b1220;
-      --blue-900:#0b1a44;
-      --blue-800:#0e2a83;
-      --blue-700:#1e3a8a;
-      --blue-600:#1d4ed8;
-      --blue-500:#3b82f6;
-      --blue-400:#60a5fa;
-      --blue-300:#93c5fd;
-      --sky-300:#7dd3fc;
-    }
-
-    html,body{ font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink); background:#fff; scroll-behavior:smooth }
-    .display{ font-family:'Space Grotesk',ui-rounded,system-ui,sans-serif; letter-spacing:-.02em }
-    .label{ font-family:'Space Grotesk',ui-rounded,system-ui,sans-serif; text-transform:uppercase; letter-spacing:.08em; font-weight:700 }
-
-    /* Brand visuals */
-    .brand-gradient{
-      background:
-        radial-gradient(1100px 700px at -10% -10%, rgba(125,211,252,.22), transparent 55%),
-        radial-gradient(900px 700px at 110% 20%, rgba(147,197,253,.22), transparent 55%),
-        linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 55%, var(--blue-500) 100%);
-    }
-    .brand-border{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.14) }
-    .card{ background:linear-gradient(180deg,#fff,#f8fbff); border:1px solid rgba(2,6,23,.06); border-radius:1rem; box-shadow:0 10px 30px rgba(2,6,23,.08) }
-    .btn{ font-weight:800; transition: transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease }
-    .btn:hover{ transform: translateY(-2px) scale(1.01) }
-    .glow{ box-shadow: 0 24px 64px rgba(29,78,216,.35), 0 0 0 4px rgba(59,130,246,.15), inset 0 1px 0 rgba(255,255,255,.08) }
-    .ring-neo{ box-shadow: 0 0 0 6px rgba(125,211,252,.18) }
-    .pill{ border-radius:999px }
-
-    /* Phone mock */
-    .phone{ border:12px solid #0f172a; border-bottom-width:18px; border-top-width:18px; border-radius:36px; background:#0b1a44; width:280px; height:560px; box-shadow:0 20px 60px rgba(2,6,23,.35); position:relative }
-    .screen{ position:absolute; inset:0; border-radius:24px; overflow:hidden }
-
-    /* Animations: reveal + parallax + hero extras */
-    .reveal{ opacity:0; transform: translateY(18px) scale(.98); transition: opacity .6s ease, transform .6s ease }
-    .reveal.in-view{ opacity:1; transform:none }
-    .stagger-0{ transition-delay:0ms } .stagger-1{ transition-delay:90ms } .stagger-2{ transition-delay:180ms }
-    .stagger-3{ transition-delay:270ms } .stagger-4{ transition-delay:360ms } .stagger-5{ transition-delay:450ms }
-
-    .parallax-layer{ position:absolute; inset:auto; will-change: transform; pointer-events:none }
-    .parallax-scene{ position:absolute; inset:0; overflow:hidden; pointer-events:none }
-    .parallax-hero-mask{ position:relative; z-index:1 }
-
-    .beam{ position:absolute; left:-30%; top:15%; width:160%; height:12px; opacity:.28;
-      background:linear-gradient(90deg, transparent, rgba(125,211,252,.9), transparent);
-      transform: rotate(8deg) translateX(-30%); filter: blur(2px); animation: beam-move 6s linear infinite }
-    @keyframes beam-move{ 0%{transform: rotate(8deg) translateX(-30%)} 100%{transform: rotate(8deg) translateX(30%)} }
-
-    .phone-entrance{ animation: phone-in .9s cubic-bezier(.2,.7,.2,1) .2s both; transform-origin:60% 40% }
-    @keyframes phone-in{ from{opacity:0; transform: translateY(24px) rotate(-2.5deg) scale(.98)} to{opacity:1; transform: translateY(0) rotate(0) scale(1)} }
-
-    @media (prefers-reduced-motion: reduce){
-      .beam, .reveal, .phone-entrance{ animation:none !important; opacity:1; transform:none }
-      .reveal{ transition:none }
-      .btn:hover{ transform:none }
-    }
-
-    /* Routing */
-    .page{ display:none }
-    .page.active{ display:block }
-
-    /* Inputs */
-    .input{ outline:none }
-    .input:focus{ box-shadow: 0 0 0 4px rgba(59,130,246,.25) }
-
-    /* Image card hover */
-    .img-card{ transition: transform .25s ease, box-shadow .25s ease; }
-    .img-card:hover{ transform: translateY(-4px); box-shadow: 0 20px 40px rgba(2,6,23,.15); }
-  </style>
-</head>
-<body class="bg-white text-slate-900">
-  <!-- Header -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex items-center justify-between h-16">
-        <a href="#home" class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold brand-gradient glow">H</div>
-          <span class="text-xl font-extrabold tracking-tight text-slate-900 display">Homer</span>
-        </a>
-        <nav class="hidden md:flex items-center gap-8">
-          <a href="#home" class="text-slate-700 hover:text-slate-900">Home</a>
-          <a href="#about" class="text-slate-700 hover:text-slate-900">About</a>
-          <a href="#affiliate" class="text-slate-700 hover:text-slate-900">Homer Affiliate</a>
-          <a href="#contact" class="text-slate-700 hover:text-slate-900">Contact & Socials</a>
+export default function HomerLanding() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white via-sky-50 to-white text-slate-900">
+      {/* Navbar */}
+      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/60 border-b border-slate-200/60">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <a href="#home" className="flex items-center gap-2 font-black tracking-tight text-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-sky-600">
+              <path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z" />
+            </svg>
+            HOMER
+          </a>
+          <div className="hidden md:flex items-center gap-6 text-sm font-semibold">
+            <a href="#features" className="hover:text-sky-700">Features</a>
+            <a href="#how" className="hover:text-sky-700">How it works</a>
+            <a href="#pricing" className="hover:text-sky-700">Pricing</a>
+            <a href="#faq" className="hover:text-sky-700">FAQ</a>
+            <a href="#contact" className="px-3 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800">Get Started</a>
+          </div>
         </nav>
-        <a href="#affiliate" class="btn hidden sm:inline-flex px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 ring-neo">Become a Broker Partner</a>
-      </div>
-    </div>
-  </header>
+      </header>
 
-  <!-- HOME PAGE -->
-  <main id="page-home" class="page active">
-    <!-- Section 1: Tagline + Phone + Image slot -->
-    <section id="home" class="relative overflow-hidden">
-      <div class="beam parallax-layer" data-parallax-speed="0.05" aria-hidden="true"></div>
-      <div class="parallax-scene" aria-hidden="true">
-        <span class="parallax-layer rounded-full blur-3xl opacity-60" data-parallax-speed="0.15"
-              style="top:-140px; left:-160px; width:420px; height:420px; background:radial-gradient(circle at 30% 30%, var(--blue-400), transparent 60%);"></span>
-        <span class="parallax-layer rounded-full blur-3xl opacity-40" data-parallax-speed="0.22"
-              style="top:40%; right:-160px; width:480px; height:480px; background:radial-gradient(circle at 70% 70%, var(--blue-600), transparent 60%);"></span>
-        <span class="parallax-layer rounded-full blur-3xl opacity-40" data-parallax-speed="0.3"
-              style="bottom:-140px; left:20%; width:360px; height:360px; background:radial-gradient(circle at 50% 50%, var(--blue-900), transparent 60%);"></span>
-      </div>
-
-      <div class="brand-gradient parallax-hero-mask brand-border">
-        <div class="max-w-7xl mx-auto px-6 pt-16 pb-10 text-white">
-          <div class="grid lg:grid-cols-3 gap-10 items-start">
-            <!-- Text column -->
-            <div class="reveal lg:col-span-1">
-              <div class="pill inline-flex items-center gap-2 bg-white/10 px-4 py-2 mb-5 text-xs label">
-                Streamline rent the bold, modern way
-              </div>
-              <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight display">
-                Make rent simple with Homer
+      {/* Hero */}
+      <section id="home" className="relative overflow-hidden">
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-sky-200/40 rounded-full blur-3xl"/>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Smarter rentals start here</span>
+              <h1 className="mt-4 text-4xl md:text-6xl font-black leading-tight">
+                Pay rent in seconds. <span className="text-sky-700">Build your Homer Score</span>.
               </h1>
-              <p class="mt-5 text-lg text-blue-100">
-                Pay on time, split with roommates, and track everything in one place—with vibrant clarity and bank‑level security.
+              <p className="mt-4 text-base md:text-lg text-slate-600 max-w-xl">
+                Homer helps tenants pay rent securely (Razorpay‑ready), track payments, and earn a trusted <strong>Homer Score</strong> landlords love.
+                Reviews for both owners and tenants keep things fair and transparent.
               </p>
-
-              <!-- Replaced buttons with your image -->
-              <a class="block mt-8 img-card rounded-xl overflow-hidden max-w-md">
-                <img
-                  src="https://s3-alpha.figma.com/hub/file/5517710951/f56cbae9-e83b-4b83-9a95-71a78334ee66-cover.png"
-                  alt="Homer promotional graphic"
-                  class="w-full h-auto"
-                  onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
-                />
-              </a>
-              <p class="mt-3 text-xs text-blue-100/80">You can swap this image anytime by changing the link above.</p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a href="#contact" className="px-5 py-3 rounded-2xl bg-slate-900 text-white font-semibold shadow-sm hover:shadow-md transition">Request Early Access</a>
+                <a href="#demo" className="px-5 py-3 rounded-2xl bg-white border border-slate-300 font-semibold hover:border-slate-400">Live Demo</a>
+              </div>
+              <p className="mt-3 text-xs text-slate-500">Android & iOS coming soon • Web app preview available</p>
             </div>
-
-            <!-- Phone mock column -->
-            <div class="reveal flex justify-center lg:justify-center">
-              <div class="phone ring-neo phone-entrance">
-                <div class="screen">
-                  <div class="h-full w-full relative" style="background: radial-gradient(600px 400px at 20% 0%, rgba(125,211,252,.18), transparent 45%), linear-gradient(180deg, #0b1a44, #153e75)">
-                    <div class="p-5">
-                      <div class="flex items-center justify-between text-white/90">
-                        <div class="font-bold display">Homer</div>
-                        <div class="text-[10px] bg-white/10 px-2 py-1 rounded label">Secure</div>
+            <div className="relative">
+              <div className="rounded-3xl border border-slate-200 shadow-xl bg-white p-4 md:p-6">
+                <div className="aspect-[9/18] w-full rounded-2xl bg-gradient-to-b from-sky-100 to-white flex items-center justify-center">
+                  {/* Phone mock */}
+                  <div className="w-[260px] h-[520px] rounded-[36px] border-[10px] border-slate-900 bg-white shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="w-8 h-1.5 bg-slate-200 rounded-full"/>
+                        <div className="w-10 h-1.5 bg-slate-200 rounded-full"/>
                       </div>
-                      <div class="mt-6 card brand-border bg-white/5 p-4">
-                        <div class="flex items-center justify-between text-white">
-                          <span class="text-sm label">Next Rent</span>
-                          <span class="font-extrabold display text-blue-300">$1,450</span>
+                      <div className="mt-6 text-center">
+                        <div className="mx-auto w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
                         </div>
-                        <div class="mt-3 w-full h-2 bg-white/15 rounded overflow-hidden">
-                          <div class="h-2 rounded progress-bar"></div>
+                        <p className="mt-2 text-xs font-bold tracking-wider text-slate-500">HOMER</p>
+                        <h3 className="mt-3 font-black text-xl">Pay Rent</h3>
+                        <div className="mt-3 grid grid-cols-3 gap-2 text-left text-xs">
+                          {[
+                            {t:"On‑time", v:"12/12"},
+                            {t:"Homer Score", v:"784"},
+                            {t:"Reviews", v:"18"},
+                          ].map((i,idx)=> (
+                            <div key={idx} className="rounded-xl border border-slate-200 p-2">
+                              <p className="text-slate-500">{i.t}</p>
+                              <p className="font-bold">{i.v}</p>
+                            </div>
+                          ))}
                         </div>
-                        <div class="mt-2 text-xs text-blue-100/80">Due in 8 days • Auto‑pay on</div>
+                        <button className="mt-4 w-full py-2 rounded-xl bg-sky-600 text-white font-semibold">Pay via UPI</button>
+                        <button className="mt-2 w-full py-2 rounded-xl border border-slate-300 font-semibold">View History</button>
                       </div>
-                      <div class="mt-4 card bg-white/10 brand-border p-3">
-                        <div class="text-blue-100/90 text-sm mb-2 label">Recent Activity</div>
-                        <div class="space-y-2 text-white/90 text-xs">
-                          <div class="flex justify-between"><span>Utilities • Paid</span><span>-$86.40</span></div>
-                          <div class="flex justify-between"><span>Rent • Scheduled</span><span>-$1,450.00</span></div>
-                          <div class="flex justify-between"><span>Security deposit • Held</span><span>$1,450.00</span></div>
-                        </div>
-                      </div>
-                      <div class="mt-4 text-center text-[10px] text-white/60">Demo preview</div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="absolute -bottom-6 -left-4 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">0.98% service fee</div>
+              <div className="absolute -top-6 -right-6 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">Secure • UPI/Razorpay</div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <!-- Your Image Slot column (beside text where phone mockup is) -->
-            <div class="reveal">
-              <div class="card p-4 bg-white/90">
-                <div class="rounded-lg overflow-hidden relative">
-                  <!-- Placeholder image slot for you to replace later -->
-                  <img
-                    src="https://via.placeholder.com/640x400?text=Your+Image+Here"
-                    alt="Your image here"
-                    class="w-full h-auto"
-                    onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
-                  />
-                </div>
-                <p class="mt-3 text-slate-600 text-sm">Replace the placeholder above with your own image URL to showcase next to the phone.</p>
-                <div class="mt-2 text-xs text-slate-500">Tip: Keep it landscape (around 16:9) for best fit.</div>
+      {/* Logos / social proof */}
+      <section aria-label="social-proof" className="py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-xs font-semibold text-slate-500">Built for tenants • trusted by owners & brokers</div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="py-16 md:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-black">Everything you need for stress‑free renting</h2>
+            <p className="mt-3 text-slate-600">Fast payments, transparent ratings, and tools that keep everyone accountable.</p>
+          </div>
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'One‑tap rent payments',
+                desc: 'Pay via UPI or card using a secure Razorpay flow. Auto‑reminders, receipts, GST‑ready invoices.',
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M2 6h20v12H2z"/><path d="M4 10h6v2H4z" fill="white"/></svg>
+                ),
+              },
+              {
+                title: 'Homer Score',
+                desc: 'Weighted score for payment reliability (on‑time vs late vs missed). Helps you stand out to owners.',
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7-10 5 10 5 10-5-10-5z"/></svg>
+                ),
+              },
+              {
+                title: 'Mutual reviews',
+                desc: 'Fair, two‑way reviews for owners and tenants. Build trust before you sign.',
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M2 4h20v12H6l-4 4z"/></svg>
+                ),
+              },
+              {
+                title: 'Smart reminders',
+                desc: 'Custom due‑date nudges on WhatsApp/email. Avoid late fees effortlessly.',
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12 2a7 7 0 0 0-7 7v5l-2 2h18l-2-2V9a7 7 0 0 0-7-7zM9 20h6v2H9z"/></svg>
+                ),
+              },
+              {
+                title: 'Owner dashboard',
+                desc: 'Verify Homer Scores, track payments, and manage tenants from a clean, simple UI.',
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M3 13h8V3H3v10zm10 8h8V3h-8v18z"/></svg>
+                ),
+              },
+              {
+                title: 'PG/Coliving ready',
+                desc: 'White‑label Homer for societies, hostels, and property managers with per‑door pricing.',
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M3 11 12 4l9 7v9H3z"/></svg>
+                ),
+              },
+            ].map((f, i) => (
+              <div key={i} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+                <div className="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">{f.icon}</div>
+                <h3 className="mt-4 font-extrabold text-lg">{f.title}</h3>
+                <p className="mt-1 text-slate-600 text-sm">{f.desc}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section id="how" className="py-16 md:py-24 bg-sky-50/60">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-black">How Homer works</h2>
+            <p className="mt-3 text-slate-600">From sign‑up to verified score in minutes.</p>
+          </div>
+          <ol className="mt-10 grid md:grid-cols-4 gap-6">
+            {[
+              {n: '01', t: 'Create account', d: 'Sign up with phone + OTP. Add your property and due date.'},
+              {n: '02', t: 'Pay securely', d: 'Use UPI/Card via Razorpay. Auto‑generate receipts & invoices.'},
+              {n: '03', t: 'Get Homer Score', d: 'Each month updates your score based on payment behaviour.'},
+              {n: '04', t: 'Share with owners', d: 'Share your verified score & reviews to win the house hunt.'},
+            ].map((s,i)=> (
+              <li key={i} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="text-slate-400 font-black">{s.n}</div>
+                <h3 className="mt-2 font-extrabold">{s.t}</h3>
+                <p className="mt-1 text-sm text-slate-600">{s.d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Demo CTA */}
+      <section id="demo" className="py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-black">Try the web preview</h2>
+          <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Take Homer for a spin in your browser. No installs. No credit card. Just rent, paid.</p>
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <a href="#contact" className="px-5 py-3 rounded-2xl bg-sky-600 text-white font-semibold shadow-sm hover:shadow-md transition">Request Demo Link</a>
+            <a href="#faq" className="px-5 py-3 rounded-2xl bg-white border border-slate-300 font-semibold hover:border-slate-400">Questions?</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="py-16 md:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-black">Simple, transparent pricing</h2>
+            <p className="mt-3 text-slate-600">Only pay when you pay rent. No hidden fees.</p>
+          </div>
+          <div className="mt-10 grid md:grid-cols-3 gap-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="font-extrabold text-lg">Tenants</h3>
+              <p className="mt-2 text-sm text-slate-600">Pay‑as‑you‑go</p>
+              <div className="mt-4 text-4xl font-black">0.98%<span className="text-base font-semibold text-slate-500"> per rent</span></div>
+              <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                <li>• UPI/Card via Razorpay</li>
+                <li>• Homer Score</li>
+                <li>• Receipts & history</li>
+                <li>• Tenant/Owner reviews</li>
+              </ul>
+              <a href="#contact" className="mt-6 inline-block px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold">Start now</a>
+            </div>
+            <div className="rounded-3xl border-2 border-sky-600 bg-gradient-to-b from-sky-50 to-white p-6 shadow-sm">
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Most Popular</div>
+              <h3 className="mt-2 font-extrabold text-lg">Societies / PG / Coliving</h3>
+              <p className="mt-2 text-sm text-slate-600">White‑label Homer</p>
+              <div className="mt-4 text-4xl font-black">₹10–₹30<span className="text-base font-semibold text-slate-500"> / door / month</span></div>
+              <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                <li>• Admin dashboard</li>
+                <li>• Bulk reminders</li>
+                <li>• Reports & exports</li>
+                <li>• Support SLA</li>
+              </ul>
+              <a href="#contact" className="mt-6 inline-block px-4 py-2 rounded-xl bg-sky-600 text-white font-semibold">Talk to sales</a>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="font-extrabold text-lg">Owners/Brokers</h3>
+              <p className="mt-2 text-sm text-slate-600">Verify fast</p>
+              <div className="mt-4 text-4xl font-black">Free<span className="text-base font-semibold text-slate-500"> to verify</span></div>
+              <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                <li>• View Homer Scores</li>
+                <li>• Verify payment history</li>
+                <li>• Request references</li>
+                <li>• Manage listings</li>
+              </ul>
+              <a href="#contact" className="mt-6 inline-block px-4 py-2 rounded-xl bg-white border border-slate-300 font-semibold">Get access</a>
             </div>
           </div>
         </div>
-        <svg class="text-white relative z-[1]" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="currentColor" width="100%" height="80">
-          <path d="M0,64L1440,0L1440,80L0,80Z"></path>
-        </svg>
-      </div>
-    </section>
+      </section>
 
-    <!-- Section 2: Features -->
-    <section id="features" class="py-16 sm:py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10 reveal">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 display">Key features that make rent simple</h2>
-          <p class="text-slate-600">Fast, transparent, and secure</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="card p-6 reveal">
-            <h3 class="text-xl font-extrabold mb-2 display">One‑tap payments</h3>
-            <p class="text-slate-600">Pay rent in seconds with secure transfers and instant confirmations.</p>
-          </div>
-          <div class="card p-6 reveal">
-            <h3 class="text-xl font-extrabold mb-2 display">Auto‑pay with control</h3>
-            <p class="text-slate-600">Schedule once and relax. Pause, edit, or skip anytime.</p>
-          </div>
-          <div class="card p-6 reveal">
-            <h3 class="text-xl font-extrabold mb-2 display">Roommate split</h3>
-            <p class="text-slate-600">Split fairly. Everyone sees what they owe—no chasing.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 3: Advantages -->
-    <section id="advantages" class="py-16 sm:py-20 bg-slate-50">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-3xl sm:text-4xl font-extrabold mb-10 reveal display">Why renters choose Homer</h2>
-        <div class="grid lg:grid-cols-3 gap-6">
-          <div class="card p-6 reveal">
-            <div class="label text-blue-700 mb-2">Faster</div>
-            <h3 class="text-xl font-extrabold mb-2 display">Pay in under 30 seconds</h3>
-            <p class="text-slate-600">Saved methods and instant receipts save time.</p>
-          </div>
-          <div class="card p-6 reveal">
-            <div class="label text-blue-700 mb-2">Smarter</div>
-            <h3 class="text-xl font-extrabold mb-2 display">No more late fees</h3>
-            <p class="text-slate-600">Cushion dates and reminders keep you ahead.</p>
-          </div>
-          <div class="card p-6 reveal">
-            <div class="label text-blue-700 mb-2">Transparent</div>
-            <h3 class="text-xl font-extrabold mb-2 display">Crystal‑clear tracking</h3>
-            <p class="text-slate-600">See what’s paid, pending, and next at a glance.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 4: Socials -->
-    <section id="socials" class="py-16 sm:py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="text-center mb-10 reveal">
-          <h2 class="text-3xl sm:text-4xl font-extrabold display">Join our community</h2>
-          <p class="text-slate-600 mt-2">Follow Homer for updates, tips, and product news</p>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <a class="card p-6 flex items-center gap-4 reveal hover:shadow-xl transition-shadow" href="#contact">
-            <span class="w-12 h-12 rounded-xl flex items-center justify-center text-white bg-blue-600">X</span>
-            <div>
-              <div class="font-extrabold">Twitter/X</div>
-              <div class="text-slate-600 text-sm">@homerapp</div>
-            </div>
-          </a>
-          <a class="card p-6 flex items-center gap-4 reveal hover:shadow-xl transition-shadow" href="#contact">
-            <span class="w-12 h-12 rounded-xl flex items-center justify-center text-white bg-blue-700">in</span>
-            <div>
-              <div class="font-extrabold">LinkedIn</div>
-              <div class="text-slate-600 text-sm">Homer Payments</div>
-            </div>
-          </a>
-          <a class="card p-6 flex items-center gap-4 reveal hover:shadow-xl transition-shadow" href="#contact">
-            <span class="w-12 h-12 rounded-xl flex items-center justify-center text-white bg-blue-500">IG</span>
-            <div>
-              <div class="font-extrabold">Instagram</div>
-              <div class="text-slate-600 text-sm">@homer.app</div>
-            </div>
-          </a>
-          <a class="card p-6 flex items-center gap-4 reveal hover:shadow-xl transition-shadow" href="#contact">
-            <span class="w-12 h-12 rounded-xl flex items-center justify-center text-white bg-blue-600">YT</span>
-            <div>
-              <div class="font-extrabold">YouTube</div>
-              <div class="text-slate-600 text-sm">Homer Academy</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Download CTA -->
-    <section id="download" class="py-16 sm:py-20">
-      <div class="max-w-5xl mx-auto px-6 text-center">
-        <h2 class="text-3xl sm:text-4xl font-extrabold display">Get Homer today</h2>
-        <p class="mt-3 text-slate-600">Join thousands simplifying rent every month.</p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a class="btn px-6 py-4 rounded-xl text-white w-full sm:w-auto" style="background:linear-gradient(135deg,var(--blue-600),var(--blue-400))">Download on the App Store</a>
-          <a class="btn px-6 py-4 rounded-xl text-white w-full sm:w-auto" style="background:linear-gradient(135deg,var(--blue-700),var(--blue-600))">Get it on Google Play</a>
-        </div>
-        <p class="mt-4 text-xs text-slate-500">Buttons are demo placeholders. Replace with your real store links.</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- ABOUT PAGE -->
-  <main id="page-about" class="page">
-    <section class="relative overflow-hidden">
-      <div class="brand-gradient brand-border">
-        <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 text-white">
-          <h1 class="text-4xl sm:text-5xl font-extrabold display">About Homer</h1>
-          <p class="mt-4 text-blue-100 text-lg">We’re building the modern way to pay rent—fast, transparent, and stress‑free.</p>
-        </div>
-        <svg class="text-white" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="currentColor" width="100%" height="80"><path d="M0,64L1440,0L1440,80L0,80Z"></path></svg>
-      </div>
-    </section>
-    <section class="py-16 sm:py-20 bg-white">
-      <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-        <div class="card p-6 reveal">
-          <h3 class="text-2xl font-extrabold display mb-2">Our mission</h3>
-          <p class="text-slate-600">Eliminate late fees and payment anxiety by making rent effortless.</p>
-        </div>
-        <div class="card p-6 reveal">
-          <h3 class="text-2xl font-extrabold display mb-2">Our approach</h3>
-          <p class="text-slate-600">Delightful experience, strong security, and real outcomes.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- AFFILIATE PAGE -->
-  <main id="page-affiliate" class="page">
-    <section class="relative overflow-hidden">
-      <div class="brand-gradient brand-border">
-        <div class="max-w-7xl mx-auto px-6 pt-16 pb-12 text-white">
-          <div class="grid md:grid-cols-2 gap-10 items-center">
-            <div class="reveal">
-              <div class="pill inline-flex items-center gap-2 bg-white/10 px-4 py-2 mb-5 text-xs label">Broker Program</div>
-              <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight display">Homer Affiliate for Brokers</h1>
-              <p class="mt-4 text-lg text-blue-100">Earn recurring revenue by introducing renters and landlords to Homer.</p>
-              <a href="#affiliate-form" class="btn mt-8 inline-flex px-6 py-3 rounded-lg bg-white text-slate-900 font-extrabold">Apply now</a>
-            </div>
-            <div class="hidden md:flex justify-end reveal">
-              <div class="phone ring-neo phone-entrance">
-                <div class="screen">
-                  <div class="h-full w-full bg-gradient-to-b from-[#0b1a44] via-[#0e2a83] to-[#153e75] p-5">
-                    <div class="text-white/90 font-bold display">Affiliate Dashboard</div>
-                    <div class="mt-5 card bg-white/10 p-4">
-                      <div class="text-blue-100/90 text-sm mb-1 label">This month</div>
-                      <div class="text-white font-extrabold text-2xl display">$2,940</div>
-                      <div class="text-white/60 text-xs mt-1">Net earnings</div>
-                    </div>
-                    <div class="mt-3 grid grid-cols-2 gap-3">
-                      <div class="card bg-white/10 p-3 text-white/90">
-                        <div class="text-xs label">New referrals</div>
-                        <div class="font-extrabold text-lg display">18</div>
-                      </div>
-                      <div class="card bg-white/10 p-3 text-white/90">
-                        <div class="text-xs label">Active renters</div>
-                        <div class="font-extrabold text-lg display">142</div>
-                      </div>
-                    </div>
-                    <div class="mt-3 card bg-white/10 p-3 text-white/90">
-                      <div class="text-xs mb-1 label">Payout status</div>
-                      <div class="font-extrabold display">Scheduled • 28th</div>
-                    </div>
-                    <div class="mt-4 text-center text-[10px] text-white/60">Demo preview</div>
-                  </div>
-                </div>
+      {/* FAQ */}
+      <section id="faq" className="py-16 md:py-24 bg-sky-50/60">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-black text-center">Frequently asked questions</h2>
+          <div className="mt-10 grid md:grid-cols-2 gap-6">
+            {[
+              {q:'Is Homer a wallet?', a:'No. Homer uses trusted payment rails (e.g., Razorpay) to process rent and records your payment history and score.'},
+              {q:'What is Homer Score?', a:'A weighted score of on‑time vs late vs missed rent payments. Sharing it helps owners quickly trust your profile.'},
+              {q:'Are my payments secure?', a:'Yes. We use PCI‑compliant processors and never store sensitive card/UPI credentials on our servers.'},
+              {q:'Can owners see my data?', a:'Only what you choose to share—like your score, payment streak, and reviews.'},
+            ].map((f,i)=> (
+              <div key={i} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h3 className="font-extrabold">{f.q}</h3>
+                <p className="mt-2 text-sm text-slate-600">{f.a}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
-        <svg class="text-white" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="currentColor" width="100%" height="80"><path d="M0,64L1440,0L1440,80L0,80Z"></path></svg>
-      </div>
-    </section>
+      </section>
 
-    <section id="affiliate-form" class="py-16 sm:py-20 bg-slate-50">
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="card p-6 sm:p-8 reveal">
-          <div class="flex items-start justify-between gap-6 flex-wrap">
-            <div>
-              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 display">Broker signup</h3>
-              <p class="mt-2 text-slate-600">Apply to the Homer Affiliate program. We’ll review and reply within 2 business days.</p>
-              <p class="mt-2 text-xs text-slate-500">This is a demo form and will not submit real data.</p>
-            </div>
-            <a href="#home" class="text-blue-700 font-semibold">Back to Home</a>
-          </div>
-
-          <form class="mt-8 space-y-6" onsubmit="handleAffiliateSubmit(event)">
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div><label class="block text-xs label text-slate-700 mb-2">First name</label><input type="text" required class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Alex"/></div>
-              <div><label class="block text-xs label text-slate-700 mb-2">Last name</label><input type="text" required class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Morgan"/></div>
-              <div><label class="block text-xs label text-slate-700 mb-2">Business email</label><input type="email" required class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="alex@yourbrokerage.com"/></div>
-              <div><label class="block text-xs label text-slate-700 mb-2">Phone</label><input type="tel" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="+1 (___) ___‑____"/></div>
-              <div class="sm:col-span-2"><label class="block text-xs label text-slate-700 mb-2">Brokerage name</label><input type="text" required class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Prime Realty Group"/></div>
-              <div><label class="block text-xs label text-slate-700 mb-2">City</label><input type="text" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Austin"/></div>
-              <div><label class="block text-xs label text-slate-700 mb-2">State/Region</label><input type="text" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="TX"/></div>
-              <div class="sm:col-span-2">
-                <label class="block text-xs label text-slate-700 mb-2">Estimated monthly rental volume</label>
-                <select class="input w-full px-4 py-3 border border-slate-300 rounded-lg">
-                  <option>Under $50,000</option><option>$50,000 — $250,000</option><option>$250,000 — $1,000,000</option><option>$1,000,000+</option>
-                </select>
+      {/* Contact */}
+      <section id="contact" className="py-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl md:text-3xl font-black">Get early access</h2>
+            <p className="mt-2 text-slate-600">Tell us a bit about you and we’ll send the demo link + onboarding steps.</p>
+            <form className="mt-6 grid gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <input className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full name"/>
+                <input className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email"/>
               </div>
-              <div class="sm:col-span-2"><label class="block text-xs label text-slate-700 mb-2">How did you hear about Homer?</label><input type="text" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Referral, social, event, etc."/></div>
-              <div class="sm:col-span-2"><label class="block text-xs label text-slate-700 mb-2">Notes</label><textarea rows="4" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Anything we should know?"></textarea></div>
-            </div>
-            <div class="flex items-center justify-between gap-4">
-              <div class="text-xs text-slate-500">By applying, you agree to our partner terms.</div>
-              <button class="btn px-6 py-3 rounded-lg text-white" style="background: linear-gradient(135deg, var(--blue-600), var(--blue-500))">Submit application</button>
-            </div>
-          </form>
-
-          <div id="affiliate-success" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800">
-            Thank you! Your demo submission was received. We’ll be in touch shortly.
+              <input className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Phone (WhatsApp)"/>
+              <textarea className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" rows={4} placeholder="Tell us about your use case (tenant / owner / PG/coliving / broker)"></textarea>
+              <button className="justify-self-start px-5 py-3 rounded-2xl bg-slate-900 text-white font-semibold">Request access</button>
+              <p className="text-xs text-slate-500">By continuing you agree to our <a href="#" className="underline">Terms</a> and <a href="#" className="underline">Privacy Policy</a>.</p>
+            </form>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- CONTACT/SOCIALS PAGE -->
-  <main id="page-contact" class="page">
-    <section class="relative overflow-hidden">
-      <div class="brand-gradient brand-border">
-        <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 text-white">
-          <h1 class="text-4xl sm:text-5xl font-extrabold display">Contact & Socials</h1>
-          <p class="mt-4 text-blue-100 text-lg">Say hello, follow along, and share feedback—we’d love to hear from you.</p>
-        </div>
-        <svg class="text-white" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="currentColor" width="100%" height="80"><path d="M0,64L1440,0L1440,80L0,80Z"></path></svg>
-      </div>
-    </section>
-
-    <section class="py-16 sm:py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-8">
-        <div class="card p-6 reveal">
-          <h3 class="text-2xl font-extrabold display mb-2">Social channels</h3>
-          <div class="grid grid-cols-2 gap-4">
-            <a class="card p-4 flex items-center gap-3 hover:shadow-xl transition-shadow" href="#">
-              <span class="w-10 h-10 rounded-lg text-white flex items-center justify-center bg-blue-600">X</span>
-              <div><div class="font-bold">Twitter/X</div><div class="text-slate-600 text-sm">@homerapp</div></div>
-            </a>
-            <a class="card p-4 flex items-center gap-3 hover:shadow-xl transition-shadow" href="#">
-              <span class="w-10 h-10 rounded-lg text-white flex items-center justify-center bg-blue-700">in</span>
-              <div><div class="font-bold">LinkedIn</div><div class="text-slate-600 text-sm">Homer Payments</div></div>
-            </a>
-            <a class="card p-4 flex items-center gap-3 hover:shadow-xl transition-shadow" href="#">
-              <span class="w-10 h-10 rounded-lg text-white flex items-center justify-center bg-blue-500">IG</span>
-              <div><div class="font-bold">Instagram</div><div class="text-slate-600 text-sm">@homer.app</div></div>
-            </a>
-            <a class="card p-4 flex items-center gap-3 hover:shadow-xl transition-shadow" href="#">
-              <span class="w-10 h-10 rounded-lg text-white flex items-center justify-center bg-blue-600">YT</span>
-              <div><div class="font-bold">YouTube</div><div class="text-slate-600 text-sm">Homer Academy</div></div>
-            </a>
+      {/* Footer */}
+      <footer className="border-t border-slate-200/80 py-10 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-center gap-2 font-black">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-sky-600">
+                <path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z" />
+              </svg>
+              HOMER
+            </div>
+            <ul className="text-sm text-slate-600 grid sm:grid-cols-3 gap-x-6 gap-y-2">
+              <li><a className="hover:text-sky-700" href="#features">Features</a></li>
+              <li><a className="hover:text-sky-700" href="#pricing">Pricing</a></li>
+              <li><a className="hover:text-sky-700" href="#faq">FAQ</a></li>
+              <li><a className="hover:text-sky-700" href="#contact">Contact</a></li>
+              <li><a className="hover:text-sky-700" href="#">Privacy Policy</a></li>
+              <li><a className="hover:text-sky-700" href="#">Terms of Use</a></li>
+            </ul>
           </div>
+          <div className="mt-6 text-xs text-slate-500">© {new Date().getFullYear()} Homer App • Made in India</div>
         </div>
-
-        <div class="card p-6 reveal">
-          <h3 class="text-2xl font-extrabold display mb-2">Contact us (Demo)</h3>
-          <p class="text-slate-600 mb-4">Send a quick message. This demo shows a friendly confirmation.</p>
-          <form onsubmit="handleContact(event)" class="space-y-4">
-            <div>
-              <label class="block text-xs label text-slate-700 mb-2">Your name</label>
-              <input class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="Full name" required/>
-            </div>
-            <div>
-              <label class="block text-xs label text-slate-700 mb-2">Email</label>
-              <input type="email" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="you@example.com" required/>
-            </div>
-            <div>
-              <label class="block text-xs label text-slate-700 mb-2">Message</label>
-              <textarea rows="4" class="input w-full px-4 py-3 border border-slate-300 rounded-lg" placeholder="How can we help?" required></textarea>
-            </div>
-            <button class="btn px-6 py-3 rounded-lg text-white" style="background:linear-gradient(135deg,var(--blue-600),var(--blue-500))">Send message</button>
-          </form>
-          <div id="contact-success" class="hidden mt-4 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800">Thanks! We received your demo message.</div>
-          <p class="text-xs text-slate-500 mt-3">Note: This is a demo form and does not send real messages.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-6 py-10">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold brand-gradient glow">H</div>
-          <div>
-            <div class="font-extrabold text-slate-900 display">Homer</div>
-            <div class="text-slate-600 text-sm">Modern home rent payments</div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-6 text-sm">
-          <a href="#home" class="text-slate-700 hover:text-slate-900">Home</a>
-          <a href="#about" class="text-slate-700 hover:text-slate-900">About</a>
-          <a href="#affiliate" class="text-slate-700 hover:text-slate-900">Homer Affiliate</a>
-          <a href="#contact" class="text-slate-700 hover:text-slate-900">Contact & Socials</a>
-        </div>
-      </div>
-      <div class="mt-8 text-xs text-slate-500">© 2025 Homer. All rights reserved. Demo site for showcase purposes. Replace store links with your live listings.</div>
+      </footer>
     </div>
-  </footer>
-
-  <script>
-    // Simple router for 4 pages
-    function route() {
-      const hash = location.hash || '#home';
-      const pages = {
-        '#home': document.getElementById('page-home'),
-        '#about': document.getElementById('page-about'),
-        '#affiliate': document.getElementById('page-affiliate'),
-        '#contact': document.getElementById('page-contact')
-      };
-      Object.values(pages).forEach(p => p.classList.remove('active'));
-      (pages[hash] || pages['#home']).classList.add('active');
-      window.scrollTo({top:0, behavior:'smooth'});
-      setTimeout(()=>{ revealCheck(); }, 0);
-    }
-    window.addEventListener('hashchange', route);
-    window.addEventListener('load', route);
-
-    // Demo affiliate form submission
-    function handleAffiliateSubmit(e){
-      e.preventDefault();
-      const box = document.getElementById('affiliate-success');
-      box.classList.remove('hidden');
-      box.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-
-    // Demo contact form
-    function handleContact(e){
-      e.preventDefault();
-      const box = document.getElementById('contact-success');
-      box.classList.remove('hidden');
-      box.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-
-    // Reveal on scroll
-    const revealEls = Array.from(document.querySelectorAll('.reveal'));
-    let revealObserver;
-    function revealCheck(){
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { revealEls.forEach(el=>el.classList.add('in-view')); return; }
-      if (revealObserver) revealObserver.disconnect();
-      revealObserver = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{ if (entry.isIntersecting) entry.target.classList.add('in-view'); });
-      }, { threshold: 0.15 });
-      revealEls.forEach(el=>revealObserver.observe(el));
-    }
-
-    // Animate phone progress bar on load
-    function animateProgress(){
-      const bar = document.querySelector('.progress-bar');
-      if (!bar) return;
-      bar.style.background = `linear-gradient(90deg, var(--blue-400), var(--sky-300))`;
-      bar.style.width = '0%';
-      bar.style.transition = 'width 1.4s ease';
-      requestAnimationFrame(()=>{ bar.style.width = '72%'; });
-    }
-    window.addEventListener('load', animateProgress);
-  </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98119505e2b68b03',t:'MTc1ODIwNjI1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+  );
+}

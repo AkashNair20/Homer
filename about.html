@@ -1,303 +1,291 @@
-export default function HomerLanding() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-sky-50 to-white text-slate-900">
-      {/* Navbar */}
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/60 border-b border-slate-200/60">
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-2 font-black tracking-tight text-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-sky-600">
-              <path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z" />
-            </svg>
-            HOMER
-          </a>
-          <div className="hidden md:flex items-center gap-6 text-sm font-semibold">
-            <a href="#features" className="hover:text-sky-700">Features</a>
-            <a href="#how" className="hover:text-sky-700">How it works</a>
-            <a href="#pricing" className="hover:text-sky-700">Pricing</a>
-            <a href="#faq" className="hover:text-sky-700">FAQ</a>
-            <a href="#contact" className="px-3 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800">Get Started</a>
-          </div>
-        </nav>
-      </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homer — Smarter Rentals Start Here</title>
+  <meta name="description" content="Pay your rent securely, track history, and build a trusted Homer Score owners love. Societies/PGs get white‑label dashboards." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <meta property="og:title" content="Homer — Smarter Rentals Start Here" />
+  <meta property="og:description" content="Pay rent in seconds. Build your Homer Score. Owners and brokers can verify instantly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/homer-social.png" />
+  <meta property="og:url" content="https://yourusername.github.io/your-repo" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Optional: smooth scroll */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-white via-sky-50 to-white text-slate-900">
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/60 border-b border-slate-200/60">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2 font-black tracking-tight text-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-600"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
+        HOMER
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#features" class="hover:text-sky-700">Features</a>
+        <a href="#how" class="hover:text-sky-700">How it works</a>
+        <a href="#pricing" class="hover:text-sky-700">Pricing</a>
+        <a href="#faq" class="hover:text-sky-700">FAQ</a>
+        <a href="#contact" class="px-3 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800">Get Started</a>
+      </div>
+    </nav>
+  </header>
 
-      {/* Hero */}
-      <section id="home" className="relative overflow-hidden">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-sky-200/40 rounded-full blur-3xl"/>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Smarter rentals start here</span>
-              <h1 className="mt-4 text-4xl md:text-6xl font-black leading-tight">
-                Pay rent in seconds. <span className="text-sky-700">Build your Homer Score</span>.
-              </h1>
-              <p className="mt-4 text-base md:text-lg text-slate-600 max-w-xl">
-                Homer helps tenants pay rent securely (Razorpay‑ready), track payments, and earn a trusted <strong>Homer Score</strong> landlords love.
-                Reviews for both owners and tenants keep things fair and transparent.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a href="#contact" className="px-5 py-3 rounded-2xl bg-slate-900 text-white font-semibold shadow-sm hover:shadow-md transition">Request Early Access</a>
-                <a href="#demo" className="px-5 py-3 rounded-2xl bg-white border border-slate-300 font-semibold hover:border-slate-400">Live Demo</a>
-              </div>
-              <p className="mt-3 text-xs text-slate-500">Android & iOS coming soon • Web app preview available</p>
-            </div>
-            <div className="relative">
-              <div className="rounded-3xl border border-slate-200 shadow-xl bg-white p-4 md:p-6">
-                <div className="aspect-[9/18] w-full rounded-2xl bg-gradient-to-b from-sky-100 to-white flex items-center justify-center">
-                  {/* Phone mock */}
-                  <div className="w-[260px] h-[520px] rounded-[36px] border-[10px] border-slate-900 bg-white shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="w-8 h-1.5 bg-slate-200 rounded-full"/>
-                        <div className="w-10 h-1.5 bg-slate-200 rounded-full"/>
-                      </div>
-                      <div className="mt-6 text-center">
-                        <div className="mx-auto w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
-                        </div>
-                        <p className="mt-2 text-xs font-bold tracking-wider text-slate-500">HOMER</p>
-                        <h3 className="mt-3 font-black text-xl">Pay Rent</h3>
-                        <div className="mt-3 grid grid-cols-3 gap-2 text-left text-xs">
-                          {[
-                            {t:"On‑time", v:"12/12"},
-                            {t:"Homer Score", v:"784"},
-                            {t:"Reviews", v:"18"},
-                          ].map((i,idx)=> (
-                            <div key={idx} className="rounded-xl border border-slate-200 p-2">
-                              <p className="text-slate-500">{i.t}</p>
-                              <p className="font-bold">{i.v}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <button className="mt-4 w-full py-2 rounded-xl bg-sky-600 text-white font-semibold">Pay via UPI</button>
-                        <button className="mt-2 w-full py-2 rounded-xl border border-slate-300 font-semibold">View History</button>
-                      </div>
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-sky-200/40 rounded-full blur-3xl"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Smarter rentals start here</span>
+          <h1 class="mt-4 text-4xl md:text-6xl font-black leading-tight">Pay rent in seconds. <span class="text-sky-700">Build your Homer Score</span>.</h1>
+          <p class="mt-4 text-base md:text-lg text-slate-600 max-w-xl">
+            Homer helps tenants pay rent securely (Razorpay‑ready), track payments, and earn a trusted <strong>Homer Score</strong> landlords love.
+            Reviews for both owners and tenants keep things fair and transparent.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#contact" class="px-5 py-3 rounded-2xl bg-slate-900 text-white font-semibold shadow-sm hover:shadow-md transition">Request Early Access</a>
+            <a href="#demo" class="px-5 py-3 rounded-2xl bg-white border border-slate-300 font-semibold hover:border-slate-400">Live Demo</a>
+          </div>
+          <p class="mt-3 text-xs text-slate-500">Android & iOS coming soon • Web app preview available</p>
+        </div>
+        <div class="relative">
+          <div class="rounded-3xl border border-slate-200 shadow-xl bg-white p-4 md:p-6">
+            <div class="aspect-[9/18] w-full rounded-2xl bg-gradient-to-b from-sky-100 to-white flex items-center justify-center">
+              <!-- Phone mock -->
+              <div class="w-[260px] h-[520px] rounded-[36px] border-[10px] border-slate-900 bg-white shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 p-4">
+                  <div class="flex items-center justify-between">
+                    <div class="w-8 h-1.5 bg-slate-200 rounded-full"></div>
+                    <div class="w-10 h-1.5 bg-slate-200 rounded-full"></div>
+                  </div>
+                  <div class="mt-6 text-center">
+                    <div class="mx-auto w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-6 h-6"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
                     </div>
+                    <p class="mt-2 text-xs font-bold tracking-wider text-slate-500">HOMER</p>
+                    <h3 class="mt-3 font-black text-xl">Pay Rent</h3>
+                    <div class="mt-3 grid grid-cols-3 gap-2 text-left text-xs">
+                      <div class="rounded-xl border border-slate-200 p-2"><p class="text-slate-500">On‑time</p><p class="font-bold">12/12</p></div>
+                      <div class="rounded-xl border border-slate-200 p-2"><p class="text-slate-500">Homer Score</p><p class="font-bold">784</p></div>
+                      <div class="rounded-xl border border-slate-200 p-2"><p class="text-slate-500">Reviews</p><p class="font-bold">18</p></div>
+                    </div>
+                    <button class="mt-4 w-full py-2 rounded-xl bg-sky-600 text-white font-semibold">Pay via UPI</button>
+                    <button class="mt-2 w-full py-2 rounded-xl border border-slate-300 font-semibold">View History</button>
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -left-4 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">0.98% service fee</div>
-              <div className="absolute -top-6 -right-6 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">Secure • UPI/Razorpay</div>
             </div>
           </div>
+          <div class="absolute -bottom-6 -left-4 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">0.98% service fee</div>
+          <div class="absolute -top-6 -right-6 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">Secure • UPI/Razorpay</div>
         </div>
-      </section>
-
-      {/* Logos / social proof */}
-      <section aria-label="social-proof" className="py-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-xs font-semibold text-slate-500">Built for tenants • trusted by owners & brokers</div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section id="features" className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-black">Everything you need for stress‑free renting</h2>
-            <p className="mt-3 text-slate-600">Fast payments, transparent ratings, and tools that keep everyone accountable.</p>
-          </div>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: 'One‑tap rent payments',
-                desc: 'Pay via UPI or card using a secure Razorpay flow. Auto‑reminders, receipts, GST‑ready invoices.',
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M2 6h20v12H2z"/><path d="M4 10h6v2H4z" fill="white"/></svg>
-                ),
-              },
-              {
-                title: 'Homer Score',
-                desc: 'Weighted score for payment reliability (on‑time vs late vs missed). Helps you stand out to owners.',
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7-10 5 10 5 10-5-10-5z"/></svg>
-                ),
-              },
-              {
-                title: 'Mutual reviews',
-                desc: 'Fair, two‑way reviews for owners and tenants. Build trust before you sign.',
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M2 4h20v12H6l-4 4z"/></svg>
-                ),
-              },
-              {
-                title: 'Smart reminders',
-                desc: 'Custom due‑date nudges on WhatsApp/email. Avoid late fees effortlessly.',
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12 2a7 7 0 0 0-7 7v5l-2 2h18l-2-2V9a7 7 0 0 0-7-7zM9 20h6v2H9z"/></svg>
-                ),
-              },
-              {
-                title: 'Owner dashboard',
-                desc: 'Verify Homer Scores, track payments, and manage tenants from a clean, simple UI.',
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M3 13h8V3H3v10zm10 8h8V3h-8v18z"/></svg>
-                ),
-              },
-              {
-                title: 'PG/Coliving ready',
-                desc: 'White‑label Homer for societies, hostels, and property managers with per‑door pricing.',
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M3 11 12 4l9 7v9H3z"/></svg>
-                ),
-              },
-            ].map((f, i) => (
-              <div key={i} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <div className="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">{f.icon}</div>
-                <h3 className="mt-4 font-extrabold text-lg">{f.title}</h3>
-                <p className="mt-1 text-slate-600 text-sm">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section id="how" className="py-16 md:py-24 bg-sky-50/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-black">How Homer works</h2>
-            <p className="mt-3 text-slate-600">From sign‑up to verified score in minutes.</p>
-          </div>
-          <ol className="mt-10 grid md:grid-cols-4 gap-6">
-            {[
-              {n: '01', t: 'Create account', d: 'Sign up with phone + OTP. Add your property and due date.'},
-              {n: '02', t: 'Pay securely', d: 'Use UPI/Card via Razorpay. Auto‑generate receipts & invoices.'},
-              {n: '03', t: 'Get Homer Score', d: 'Each month updates your score based on payment behaviour.'},
-              {n: '04', t: 'Share with owners', d: 'Share your verified score & reviews to win the house hunt.'},
-            ].map((s,i)=> (
-              <li key={i} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="text-slate-400 font-black">{s.n}</div>
-                <h3 className="mt-2 font-extrabold">{s.t}</h3>
-                <p className="mt-1 text-sm text-slate-600">{s.d}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Demo CTA */}
-      <section id="demo" className="py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black">Try the web preview</h2>
-          <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Take Homer for a spin in your browser. No installs. No credit card. Just rent, paid.</p>
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <a href="#contact" className="px-5 py-3 rounded-2xl bg-sky-600 text-white font-semibold shadow-sm hover:shadow-md transition">Request Demo Link</a>
-            <a href="#faq" className="px-5 py-3 rounded-2xl bg-white border border-slate-300 font-semibold hover:border-slate-400">Questions?</a>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="py-16 md:py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-black">Simple, transparent pricing</h2>
-            <p className="mt-3 text-slate-600">Only pay when you pay rent. No hidden fees.</p>
-          </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-6">
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="font-extrabold text-lg">Tenants</h3>
-              <p className="mt-2 text-sm text-slate-600">Pay‑as‑you‑go</p>
-              <div className="mt-4 text-4xl font-black">0.98%<span className="text-base font-semibold text-slate-500"> per rent</span></div>
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                <li>• UPI/Card via Razorpay</li>
-                <li>• Homer Score</li>
-                <li>• Receipts & history</li>
-                <li>• Tenant/Owner reviews</li>
-              </ul>
-              <a href="#contact" className="mt-6 inline-block px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold">Start now</a>
-            </div>
-            <div className="rounded-3xl border-2 border-sky-600 bg-gradient-to-b from-sky-50 to-white p-6 shadow-sm">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Most Popular</div>
-              <h3 className="mt-2 font-extrabold text-lg">Societies / PG / Coliving</h3>
-              <p className="mt-2 text-sm text-slate-600">White‑label Homer</p>
-              <div className="mt-4 text-4xl font-black">₹10–₹30<span className="text-base font-semibold text-slate-500"> / door / month</span></div>
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                <li>• Admin dashboard</li>
-                <li>• Bulk reminders</li>
-                <li>• Reports & exports</li>
-                <li>• Support SLA</li>
-              </ul>
-              <a href="#contact" className="mt-6 inline-block px-4 py-2 rounded-xl bg-sky-600 text-white font-semibold">Talk to sales</a>
-            </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="font-extrabold text-lg">Owners/Brokers</h3>
-              <p className="mt-2 text-sm text-slate-600">Verify fast</p>
-              <div className="mt-4 text-4xl font-black">Free<span className="text-base font-semibold text-slate-500"> to verify</span></div>
-              <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                <li>• View Homer Scores</li>
-                <li>• Verify payment history</li>
-                <li>• Request references</li>
-                <li>• Manage listings</li>
-              </ul>
-              <a href="#contact" className="mt-6 inline-block px-4 py-2 rounded-xl bg-white border border-slate-300 font-semibold">Get access</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="py-16 md:py-24 bg-sky-50/60">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-black text-center">Frequently asked questions</h2>
-          <div className="mt-10 grid md:grid-cols-2 gap-6">
-            {[
-              {q:'Is Homer a wallet?', a:'No. Homer uses trusted payment rails (e.g., Razorpay) to process rent and records your payment history and score.'},
-              {q:'What is Homer Score?', a:'A weighted score of on‑time vs late vs missed rent payments. Sharing it helps owners quickly trust your profile.'},
-              {q:'Are my payments secure?', a:'Yes. We use PCI‑compliant processors and never store sensitive card/UPI credentials on our servers.'},
-              {q:'Can owners see my data?', a:'Only what you choose to share—like your score, payment streak, and reviews.'},
-            ].map((f,i)=> (
-              <div key={i} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="font-extrabold">{f.q}</h3>
-                <p className="mt-2 text-sm text-slate-600">{f.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-            <h2 className="text-2xl md:text-3xl font-black">Get early access</h2>
-            <p className="mt-2 text-slate-600">Tell us a bit about you and we’ll send the demo link + onboarding steps.</p>
-            <form className="mt-6 grid gap-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <input className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full name"/>
-                <input className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email"/>
-              </div>
-              <input className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Phone (WhatsApp)"/>
-              <textarea className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" rows={4} placeholder="Tell us about your use case (tenant / owner / PG/coliving / broker)"></textarea>
-              <button className="justify-self-start px-5 py-3 rounded-2xl bg-slate-900 text-white font-semibold">Request access</button>
-              <p className="text-xs text-slate-500">By continuing you agree to our <a href="#" className="underline">Terms</a> and <a href="#" className="underline">Privacy Policy</a>.</p>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-200/80 py-10 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-center gap-2 font-black">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-sky-600">
-                <path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z" />
-              </svg>
-              HOMER
-            </div>
-            <ul className="text-sm text-slate-600 grid sm:grid-cols-3 gap-x-6 gap-y-2">
-              <li><a className="hover:text-sky-700" href="#features">Features</a></li>
-              <li><a className="hover:text-sky-700" href="#pricing">Pricing</a></li>
-              <li><a className="hover:text-sky-700" href="#faq">FAQ</a></li>
-              <li><a className="hover:text-sky-700" href="#contact">Contact</a></li>
-              <li><a className="hover:text-sky-700" href="#">Privacy Policy</a></li>
-              <li><a className="hover:text-sky-700" href="#">Terms of Use</a></li>
-            </ul>
-          </div>
-          <div className="mt-6 text-xs text-slate-500">© {new Date().getFullYear()} Homer App • Made in India</div>
-        </div>
-      </footer>
+      </div>
     </div>
-  );
-}
+  </section>
+
+  <!-- Social proof tag -->
+  <section aria-label="social-proof" class="py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center text-xs font-semibold text-slate-500">Built for tenants • trusted by owners & brokers</div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-16 md:py-24 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-black">Everything you need for stress‑free renting</h2>
+        <p class="mt-3 text-slate-600">Fast payments, transparent ratings, and tools that keep everyone accountable.</p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M2 6h20v12H2z"/><path d="M4 10h6v2H4z" fill="white"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-lg">One‑tap rent payments</h3>
+          <p class="mt-1 text-slate-600 text-sm">Pay via UPI or card using a secure Razorpay flow. Auto‑reminders, receipts, GST‑ready invoices.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7-10 5 10 5 10-5-10-5z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-lg">Homer Score</h3>
+          <p class="mt-1 text-slate-600 text-sm">Weighted score for payment reliability (on‑time vs late vs missed). Helps you stand out to owners.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M2 4h20v12H6l-4 4z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-lg">Mutual reviews</h3>
+          <p class="mt-1 text-slate-600 text-sm">Fair, two‑way reviews for owners and tenants. Build trust before you sign.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 2a7 7 0 0 0-7 7v5l-2 2h18l-2-2V9a7 7 0 0 0-7-7zM9 20h6v2H9z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-lg">Smart reminders</h3>
+          <p class="mt-1 text-slate-600 text-sm">Custom due‑date nudges on WhatsApp/email. Avoid late fees effortlessly.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M3 13h8V3H3v10zm10 8h8V3h-8v18z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-lg">Owner dashboard</h3>
+          <p class="mt-1 text-slate-600 text-sm">Verify Homer Scores, track payments, and manage tenants from a clean, simple UI.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M3 11 12 4l9 7v9H3z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-lg">PG/Coliving ready</h3>
+          <p class="mt-1 text-slate-600 text-sm">White‑label Homer for societies, hostels, and property managers with per‑door pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="py-16 md:py-24 bg-sky-50/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-black">How Homer works</h2>
+        <p class="mt-3 text-slate-600">From sign‑up to verified score in minutes.</p>
+      </div>
+      <ol class="mt-10 grid md:grid-cols-4 gap-6">
+        <li class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div class="text-slate-400 font-black">01</div><h3 class="mt-2 font-extrabold">Create account</h3><p class="mt-1 text-sm text-slate-600">Sign up with phone + OTP. Add your property and due date.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div class="text-slate-400 font-black">02</div><h3 class="mt-2 font-extrabold">Pay securely</h3><p class="mt-1 text-sm text-slate-600">Use UPI/Card via Razorpay. Auto‑generate receipts & invoices.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div class="text-slate-400 font-black">03</div><h3 class="mt-2 font-extrabold">Get Homer Score</h3><p class="mt-1 text-sm text-slate-600">Each month updates your score based on payment behaviour.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><div class="text-slate-400 font-black">04</div><h3 class="mt-2 font-extrabold">Share with owners</h3><p class="mt-1 text-sm text-slate-600">Share your verified score & reviews to win the house hunt.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Demo CTA -->
+  <section id="demo" class="py-16">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-black">Try the web preview</h2>
+      <p class="mt-3 text-slate-600 max-w-2xl mx-auto">Take Homer for a spin in your browser. No installs. No credit card. Just rent, paid.</p>
+      <div class="mt-6 flex items-center justify-center gap-3">
+        <a href="#contact" class="px-5 py-3 rounded-2xl bg-sky-600 text-white font-semibold shadow-sm hover:shadow-md transition">Request Demo Link</a>
+        <a href="#faq" class="px-5 py-3 rounded-2xl bg-white border border-slate-300 font-semibold hover:border-slate-400">Questions?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-16 md:py-24 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-black">Simple, transparent pricing</h2>
+        <p class="mt-3 text-slate-600">Only pay when you pay rent. No hidden fees.</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="font-extrabold text-lg">Tenants</h3>
+          <p class="mt-2 text-sm text-slate-600">Pay‑as‑you‑go</p>
+          <div class="mt-4 text-4xl font-black">0.98%<span class="text-base font-semibold text-slate-500"> per rent</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-slate-700">
+            <li>• UPI/Card via Razorpay</li>
+            <li>• Homer Score</li>
+            <li>• Receipts & history</li>
+            <li>• Tenant/Owner reviews</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-slate-900 text-white font-semibold">Start now</a>
+        </div>
+        <div class="rounded-3xl border-2 border-sky-600 bg-gradient-to-b from-sky-50 to-white p-6 shadow-sm">
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-3 py-1 rounded-full">Most Popular</div>
+          <h3 class="mt-2 font-extrabold text-lg">Societies / PG / Coliving</h3>
+          <p class="mt-2 text-sm text-slate-600">White‑label Homer</p>
+          <div class="mt-4 text-4xl font-black">₹10–₹30<span class="text-base font-semibold text-slate-500"> / door / month</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-slate-700">
+            <li>• Admin dashboard</li>
+            <li>• Bulk reminders</li>
+            <li>• Reports & exports</li>
+            <li>• Support SLA</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-sky-600 text-white font-semibold">Talk to sales</a>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="font-extrabold text-lg">Owners/Brokers</h3>
+          <p class="mt-2 text-sm text-slate-600">Verify fast</p>
+          <div class="mt-4 text-4xl font-black">Free<span class="text-base font-semibold text-slate-500"> to verify</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-slate-700">
+            <li>• View Homer Scores</li>
+            <li>• Verify payment history</li>
+            <li>• Request references</li>
+            <li>• Manage listings</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-white border border-slate-300 font-semibold">Get access</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 md:py-24 bg-sky-50/60">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-black text-center">Frequently asked questions</h2>
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-extrabold">Is Homer a wallet?</h3><p class="mt-2 text-sm text-slate-600">No. Homer uses trusted payment rails (e.g., Razorpay) to process rent and records your payment history and score.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-extrabold">What is Homer Score?</h3><p class="mt-2 text-sm text-slate-600">A weighted score of on‑time vs late vs missed rent payments. Sharing it helps owners quickly trust your profile.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-extrabold">Are my payments secure?</h3><p class="mt-2 text-sm text-slate-600">Yes. We use PCI‑compliant processors and never store sensitive card/UPI credentials on our servers.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-extrabold">Can owners see my data?</h3><p class="mt-2 text-sm text-slate-600">Only what you choose to share—like your score, payment streak, and reviews.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h2 class="text-2xl md:text-3xl font-black">Get early access</h2>
+        <p class="mt-2 text-slate-600">Tell us a bit about you and we’ll send the demo link + onboarding steps.</p>
+        <!-- Optional: Replace action with your Formspree / Google Form link -->
+        <form class="mt-6 grid gap-4" action="#" method="post" onsubmit="alert('Thanks! We\'ll get back to you soon.'); return false;">
+          <div class="grid md:grid-cols-2 gap-4">
+            <input class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full name" name="name" required />
+            <input class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email" name="email" type="email" required />
+          </div>
+          <input class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" placeholder="Phone (WhatsApp)" name="phone" />
+          <textarea class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500" rows="4" placeholder="Tell us about your use case (tenant / owner / PG/coliving / broker)" name="usecase"></textarea>
+          <button class="justify-self-start px-5 py-3 rounded-2xl bg-slate-900 text-white font-semibold">Request access</button>
+          <p class="text-xs text-slate-500">By continuing you agree to our <a href="#" class="underline">Terms</a> and <a href="#" class="underline">Privacy Policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200/80 py-10 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="flex items-center gap-2 font-black">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-600"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
+          HOMER
+        </div>
+        <ul class="text-sm text-slate-600 grid sm:grid-cols-3 gap-x-6 gap-y-2">
+          <li><a class="hover:text-sky-700" href="#features">Features</a></li>
+          <li><a class="hover:text-sky-700" href="#pricing">Pricing</a></li>
+          <li><a class="hover:text-sky-700" href="#faq">FAQ</a></li>
+          <li><a class="hover:text-sky-700" href="#contact">Contact</a></li>
+          <li><a class="hover:text-sky-700" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-sky-700" href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="mt-6 text-xs text-slate-500">© <span id="year"></span> Homer App • Made in India</div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -107,30 +107,18 @@
       <div class="relative reveal-zoom" style="--d:240ms">
         <div class="rounded-3xl border border-slate-200/70 shadow-2xl bg-white/95 p-4 md:p-6 backdrop-blur">
           <div class="aspect-[9/18] w-full rounded-2xl bg-gradient-to-b from-brand-50 via-white to-white flex items-center justify-center">
-            <!-- Phone mock -->
-            <div class="w-[290px] h-[580px] rounded-[36px] border-[10px] border-slate-900 bg-white shadow-2xl relative overflow-hidden">
-              <div class="absolute inset-0 p-4">
-                <div class="flex items-center justify-between">
-                  <div class="w-8 h-1.5 bg-slate-200 rounded-full"></div>
-                  <div class="w-10 h-1.5 bg-slate-200 rounded-full"></div>
-                </div>
-                <div class="mt-6 text-center">
-                  <div class="mx-auto w-12 h-12 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-7 h-7"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
-                  </div>
-                  <p class="mt-2 text-[11px] font-bold tracking-wider text-slate-500">HOMER</p>
-                  <h3 class="mt-3 font-black text-2xl font-display">Pay Rent</h3>
-                  <div class="mt-3 grid grid-cols-3 gap-2 text-left text-xs">
-                    <div class="rounded-xl border border-slate-200 p-2"><p class="text-slate-500">On‑time</p><p class="font-bold">12/12</p></div>
-                    <div class="rounded-xl border border-slate-200 p-2"><p class="text-slate-500">Homer Score</p><p class="font-bold">784</p></div>
-                    <div class="rounded-xl border border-slate-200 p-2"><p class="text-slate-500">Reviews</p><p class="font-bold">18</p></div>
-                  </div>
-                  <button class="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold">Pay via UPI</button>
-                  <button class="mt-2 w-full py-2.5 rounded-xl border border-slate-300 font-semibold">View History</button>
-                </div>
+            <!-- Phone gallery (replaces mock phone) -->
+            <div class="w-[290px] h-[580px] rounded-[36px] border-[10px] border-slate-900 bg-white shadow-2xl overflow-hidden relative">
+              <div class="h-full w-full">
+                <img src="./images/image1.png" alt="Homer App Screenshot 1" class="carousel-shot w-full h-full object-cover block" />
+                <img src="./images/image2.png" alt="Homer App Screenshot 2" class="carousel-shot w-full h-full object-cover hidden" />
+              </div>
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                <span class="dot w-2 h-2 rounded-full bg-slate-300"></span>
+                <span class="dot w-2 h-2 rounded-full bg-slate-400/70"></span>
               </div>
             </div>
-          </div>
+          </div
         </div>
         <div class="absolute -bottom-6 -left-4 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">0.98% service fee</div>
         <div class="absolute -top-6 -right-6 bg-white border border-slate-200 rounded-2xl shadow-lg px-4 py-2 text-xs font-semibold">Secure • UPI/Razorpay</div>
@@ -266,6 +254,24 @@
       if(!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (80 + i*60)+'ms');
       IO.observe(el);
     });
+  </script>
+  <script>
+    // Simple 2-image carousel for hero screenshots
+    (function(){
+      const shots = document.querySelectorAll('.carousel-shot');
+      const dots = document.querySelectorAll('.dot');
+      if(shots.length < 2) return;
+      let i = 0;
+      setInterval(()=>{
+        shots[i].classList.add('hidden');
+        dots[i].classList.add('bg-slate-300');
+        dots[i].classList.remove('bg-slate-900');
+        i = (i+1) % shots.length;
+        shots[i].classList.remove('hidden');
+        dots[i].classList.remove('bg-slate-300');
+        dots[i].classList.add('bg-slate-900');
+      }, 3000);
+    })();
   </script>
 </body>
 </html>

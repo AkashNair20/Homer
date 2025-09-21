@@ -82,7 +82,7 @@
   <!-- Brand -->
 <a href="#home" class="flex items-center gap-1 md:gap-3 shrink-0">
   <img
-    src="./splash_logo_transparent_tight.png"
+    src="splash_logo_transparent_tight.png"
     alt="Homer"
     class="h-16 md:h-20 w-auto block object-contain"
     loading="eager"
@@ -103,16 +103,34 @@
       </ul>
 
       <!-- Desktop CTA -->
-      <div class="hidden md:flex items-center gap-3">
-        <a href="#features" class="btn-secondary">Explore</a>
-        <a href="#home" class="btn-primary">Get Started</a>
-      </div>
+    <!-- Desktop CTA -->
+<div class="hidden md:flex items-center">
+  <a
+    href="affiliate.html"
+    class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+  >
+    Homer Affiliate
+  </a>
+</div>
 
       <!-- Mobile menu button -->
-      <button id="navToggle" aria-label="Open menu" class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-300 p-2">
-        <svg id="navIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        <svg id="navIconClose" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
+      <!-- Mobile menu button -->
+<button
+  id="navToggle"
+  aria-label="Open menu"
+  class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-300 p-2 text-slate-900"
+>
+  <!-- Hamburger (shown by default) -->
+  <svg id="navIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+  </svg>
+
+  <!-- Close (hidden until menu opens) -->
+  <svg id="navIconClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6l-12 12"/>
+  </svg>
+</button>
+
     </nav>
 
     <!-- Mobile drawer -->
@@ -125,10 +143,15 @@
           <li><a href="#faq" class="block px-2 py-2 rounded-lg hover:bg-slate-50">FAQ</a></li>
           <li><a href="affiliate.html" class="block px-2 py-2 rounded-lg hover:bg-slate-50">Affiliate</a></li>
         </ul>
-        <div class="mt-4 flex items-center gap-3">
-          <a href="#features" class="btn-secondary w-full text-center">Explore</a>
-          <a href="#home" class="btn-primary w-full text-center">Get Started</a>
-        </div>
+        <div class="mt-4">
+  <a
+    href="affiliate.html"
+    class="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+  >
+    Homer Affiliate
+  </a>
+</div>
+
       </div>
     </div>
   </header>

@@ -242,31 +242,68 @@
     </p>
   </div>
 
- <!-- Mock iPhone sized to the image's exact dimensions -->
-<div id="phoneWrap"
-     class="relative rounded-[4.0rem] border-[8px] border-slate-900 shadow-2xl bg-black overflow-hidden"
-     style="width: 350px;">
-  <!-- The inner frame keeps the corners nice -->
-  <div class="relative w-full rounded-[3.0rem] overflow-hidden"
-       style="aspect-ratio: var(--ar, 9/19.5);">
-    <!-- Edge-fill (for a filled look on odd aspect ratios) -->
-    <img src="./pro.jpeg" alt="" aria-hidden="true"
-         class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
-    <!-- Real screenshot (no cropping) -->
-    <img id="phoneShot" src="./pro.jpeg" alt="App screenshot"
-         class="relative z-10 w-full h-full object-contain" />
+<!-- Two identical devices, locked side-by-side with a min width -->
+<section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+  <!-- Force side-by-side: no wrap + minimum width -->
+  <div class="flex flex-nowrap items-end justify-center gap-8 min-w-[700px]">
+
+    <!-- Device A (tilt left) -->
+    <div class="relative rotate-[-6deg] shrink-0">
+      <!-- Mock iPhone sized to the image's exact dimensions -->
+      <div id="phoneWrap"
+           class="relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
+           style="width: 320px;">
+        <!-- The inner frame keeps the corners nice -->
+        <div class="relative w-full rounded-[3.0rem] overflow-hidden"
+             style="aspect-ratio: var(--ar, 9/19.5);">
+          <!-- Edge-fill (for a filled look on odd aspect ratios) -->
+          <img src="./pro.jpeg" alt="" aria-hidden="true"
+               class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
+          <!-- Real screenshot (no cropping) -->
+          <img id="phoneShot" src="./pro.jpeg" alt="App screenshot"
+               class="relative z-10 w-full h-full object-contain" />
+        </div>
+
+        <!-- Notch (optional—delete if you don’t want it) -->
+        <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
+      </div>
+
+      <!-- Subtle drop shadow on surface -->
+      <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
+    </div>
+
+    <!-- Device B (tilt right) -->
+    <div class="relative rotate-[6deg] shrink-0">
+      <!-- Mock iPhone sized to the image's exact dimensions -->
+      <div id="phoneWrap"
+           class="relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
+           style="width: 320px;">
+        <!-- The inner frame keeps the corners nice -->
+        <div class="relative w-full rounded-[3.0rem] overflow-hidden"
+             style="aspect-ratio: var(--ar, 9/19.5);">
+          <!-- Edge-fill (for a filled look on odd aspect ratios) -->
+          <img src="pro.jpeg" alt="" aria-hidden="true"
+               class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
+          <!-- Real screenshot (no cropping) -->
+          <img id="phoneShot" src="pro.jpeg" alt="App screenshot"
+               class="relative z-10 w-full h-full object-contain" />
+        </div>
+
+        <!-- Notch (optional—delete if you don’t want it) -->
+        <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
+      </div>
+
+      <!-- Subtle drop shadow on surface -->
+      <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
+    </div>
+
   </div>
-
-  <!-- Notch (optional—delete if you don’t want it) -->
-  <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
-</div>
+</section>
 
 
-
-    <!-- Subtle drop shadow on surface -->
-    <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
   </div>
-</div>
+</section>
+
 
 
     </div>

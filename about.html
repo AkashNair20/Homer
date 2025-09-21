@@ -115,12 +115,12 @@
                 <!-- Dynamic Island -->
                 <div class="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-slate-900/90"></div>
                 <!-- Lottie container -->
-                <dotlottie-wc src="https://lottie.host/7440deb9-5fcd-421a-922f-e3360af8d89e/kHtBXNs9mY.lottie" class="absolute inset-0" style="width:100%;height:100%;background:transparent" autoplay loop></dotlottie-wc>
+                <iframe src="https://lottie.host/embed/7440deb9-5fcd-421a-922f-e3360af8d89e/kHtBXNs9mY.lottie" class="absolute inset-0 w-full h-full" allow="autoplay" style="border:0;background:transparent"></iframe>
               </div>
               <!-- iPhone 14 Pro Max mock 2 -->
               <div class="relative w-full max-h-[560px] aspect-[9/19.5] rounded-[36px] bg-black border-[10px] border-slate-900 shadow-2xl overflow-hidden">
                 <div class="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-slate-900/90"></div>
-                <div id="lottieRight" class="absolute inset-0"></div>
+                <iframe src="https://lottie.host/embed/7440deb9-5fcd-421a-922f-e3360af8d89e/kHtBXNs9mY.lottie" class="absolute inset-0 w-full h-full" allow="autoplay" style="border:0;background:transparent"></iframe>
               </div>
             </div>
           </div
@@ -256,24 +256,5 @@
       IO.observe(el);
     });
   </script>
-  <!-- Lottie Web (for right phone) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-n7Nn+vOTcQDNZKf0pR8t7jqcL9kzvVvX5lFhyF7yW/8uS8m9ob3mK3Q+1KDYNYnBhtqYSCdPzvJdC4g9i9wFhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- dotLottie web component (for left phone) -->
-  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
-  <script>
-    // Initialize only the RIGHT animation with Lottie Web. Left uses dotlottie-wc.
-    (function(){
-      const right = document.getElementById('lottieRight');
-      if (right && window.bodymovin) {
-        bodymovin.loadAnimation({
-          container: right,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: './animations/stars.json' // keep your local/right animation
-        });
-      }
-    })();
-  </script>
-</body>
+  </body>
 </html>

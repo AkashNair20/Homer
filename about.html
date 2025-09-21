@@ -108,15 +108,22 @@
         <div class="rounded-3xl border border-slate-200/70 shadow-2xl bg-white/95 p-4 md:p-6 backdrop-blur">
           <div class="aspect-[9/18] w-full rounded-2xl bg-gradient-to-b from-brand-50 via-white to-white flex items-center justify-center">
             <!-- Phone gallery (replaces mock phone) -->
-            <!-- Hero screenshots (simple side-by-side) -->
+            <!-- Dual iPhone mockups with Lottie animations -->
             <div class="grid grid-cols-2 gap-2 md:gap-3 items-start">
-              <img src="./image1.png" alt="Homer App Screenshot 1" class="w-full max-h-[560px] object-contain bg-transparent" />
-              <img src="./image2.png" alt="Homer App Screenshot 2" class="w-full max-h-[560px] object-contain bg-transparent" />
+              <!-- iPhone 14 Pro Max mock 1 -->
+              <div class="relative w-full max-h-[560px] aspect-[9/19.5] rounded-[36px] bg-black border-[10px] border-slate-900 shadow-2xl overflow-hidden">
+                <!-- Dynamic Island -->
+                <div class="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-slate-900/90"></div>
+                <!-- Lottie container -->
+                <div id="lottieLeft" class="absolute inset-0"></div>
+              </div>
+              <!-- iPhone 14 Pro Max mock 2 -->
+              <div class="relative w-full max-h-[560px] aspect-[9/19.5] rounded-[36px] bg-black border-[10px] border-slate-900 shadow-2xl overflow-hidden">
+                <div class="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-slate-900/90"></div>
+                <div id="lottieRight" class="absolute inset-0"></div>
+              </div>
             </div>
           </div
-          </div
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -249,6 +256,32 @@
       IO.observe(el);
     });
   </script>
-  
+  <!-- Lottie Web CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-n7Nn+vOTcQDNZKf0pR8t7jqcL9kzvVvX5lFhyF7yW/8uS8m9ob3mK3Q+1KDYNYnBhtqYSCdPzvJdC4g9i9wFhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // Initialize Lottie animations inside the iPhone mocks
+    (function(){
+      const left = document.getElementById('lottieLeft');
+      const right = document.getElementById('lottieRight');
+      if (left) {
+        bodymovin.loadAnimation({
+          container: left,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: './scoredial.json' // replace with your hosted path
+        });
+      }
+      if (right) {
+        bodymovin.loadAnimation({
+          container: right,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: './stars.json' // replace with your hosted path
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

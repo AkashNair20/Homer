@@ -14,6 +14,8 @@
   <link rel="icon" href="/favicon.ico" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS via CDN -->
@@ -25,7 +27,8 @@
           fontFamily: {
             ui: ['Poppins', 'ui-sans-serif', 'system-ui'],
             display: ['Space Grotesk', 'Poppins', 'ui-sans-serif'],
-            tech: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular']
+            tech: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
+            brand: ['Sora', 'Space Grotesk', 'Poppins', 'ui-sans-serif']  
           },
           colors: {
             brand: {
@@ -72,14 +75,23 @@
   </style>
 </head>
 <body class="min-h-screen bg-brand-50 text-slate-900 font-ui">
-  <!-- ===== New Top Navigation Bar ===== -->
+  <!-- ===== Top Navigation Bar (with reveal) ===== -->
   <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur-md reveal">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- Brand -->
-      <a href="#home" class="flex items-center gap-3 shrink-0">
-        <img src="high_logo.png" alt="Homer" class="h-8 md:h-9 w-auto" loading="eager" />
-        <span class="sr-only">Homer</span>
-      </a>
+  <!-- Brand -->
+<a href="#home" class="flex items-center gap-1 md:gap-3 shrink-0">
+  <img
+    src="splash_logo_transparent_tight.png"
+    alt="Homer"
+    class="h-16 md:h-20 w-auto block object-contain"
+    loading="eager"
+  />
+  <span class="font-brand font-extrabold uppercase tracking-tight text-2xl md:text-3xl leading-none text-slate-900 -ml-2">
+    HOMER
+  </span>
+</a>
+
 
       <!-- Desktop nav -->
       <ul class="hidden md:flex items-center gap-6 text-sm font-semibold">
@@ -230,8 +242,8 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <!-- ===== Updated stagger reveal (Option B) + mobile menu toggle ===== -->
   <script>
-    // Smooth stagger controller
     const BASE_DELAY = 120;
     const STEP_DELAY = 180;
     const DURATION_MS = 1100;
@@ -240,12 +252,22 @@
       entries.forEach((entry)=>{
         if(entry.isIntersecting){
           const container = entry.target;
+
+          // Reveal the container itself if it has a reveal class
+          if (container.classList.contains('reveal') || container.classList.contains('reveal-zoom')) {
+            container.style.setProperty('--dur', DURATION_MS + 'ms');
+            container.style.setProperty('--d', BASE_DELAY + 'ms');
+            container.classList.add('show');
+          }
+
+          // Then reveal all children with stagger
           const items = container.querySelectorAll('.reveal, .reveal-zoom');
           items.forEach((el, i)=>{
             el.style.setProperty('--dur', DURATION_MS + 'ms');
             el.style.setProperty('--d', (BASE_DELAY + i * STEP_DELAY) + 'ms');
             requestAnimationFrame(()=> el.classList.add('show'));
           });
+
           IO.unobserve(container);
         }
       });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,23 +12,28 @@
   <meta property="og:image" content="/homer-social.png" />
   <meta property="og:url" content="https://yourusername.github.io/your-repo" />
   <link rel="icon" href="/favicon.ico" />
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Site fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Brand wordmark font -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    // Tailwind tweaks for custom fonts/colors and DARK MODE via class
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             ui: ['Poppins', 'ui-sans-serif', 'system-ui'],
             display: ['Space Grotesk', 'Poppins', 'ui-sans-serif'],
             tech: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
-            brand: ['Sora', 'Space Grotesk', 'Poppins', 'ui-sans-serif']  
+            brand: ['Sora', 'Space Grotesk', 'Poppins', 'ui-sans-serif']
           },
           colors: {
             brand: {
@@ -48,271 +53,418 @@
       }
     }
   </script>
+
+  <!-- Set initial theme before paint (persisted or OS pref) -->
+  <script>
+    (() => {
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const shouldDark = stored ? stored === 'dark' : prefersDark;
+      document.documentElement.classList.toggle('dark', shouldDark);
+    })();
+  </script>
+
+  <!-- Lottie web components (for animations in features) -->
+  <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"></script>
+
   <style>
     html { scroll-behavior: smooth; }
-    .btn-primary { @apply px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition; }
-    .btn-secondary { @apply px-5 py-2.5 rounded-xl bg-white border-2 border-slate-300 font-semibold hover:border-slate-400; }
+    .btn-primary { @apply px-7 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-xl transition; }
+    .btn-secondary { @apply px-7 py-3 rounded-2xl bg-white border-2 border-slate-300 font-semibold hover:border-slate-400; }
     .chip { @apply inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-sky-900 bg-sky-100 px-3 py-1 rounded-full; }
     .section-title { @apply font-display text-4xl md:text-5xl font-black; }
 
-    /* Smooth stagger reveal */
-    .reveal, .reveal-zoom {
-      opacity: 0;
-      transform: translateY(16px) scale(0.985);
-      transition-property: opacity, transform;
-      transition-duration: var(--dur, 1100ms);
-      transition-timing-function: cubic-bezier(.22,.9,.22,1);
-      transition-delay: var(--d, 0ms);
-      will-change: opacity, transform;
-    }
-    .reveal.show, .reveal-zoom.show { opacity: 1; transform: none; }
-    .reveal-zoom { transform: scale(0.96); }
-
+    /* ===== Reveal Animations (slow + smooth + stagger) ===== */
+    .reveal { opacity: 0; transform: translateY(18px) scale(.985); transition: opacity .9s ease, transform .9s cubic-bezier(.22,.9,.22,1); transition-delay: var(--d, 0ms); }
+    .reveal.show { opacity: 1; transform: none; }
+    .reveal-zoom { opacity: 0; transform: scale(.94); transition: opacity 1s ease, transform 1s cubic-bezier(.22,.9,.22,1); transition-delay: var(--d, 0ms); }
+    .reveal-zoom.show { opacity: 1; transform: none; }
     @keyframes blobFloat { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(20px,-20px,0) scale(1.05); } 100% { transform: translate3d(0,0,0) scale(1); } }
     @keyframes glowPulse { 0%,100% { opacity:.55; } 50% { opacity:.75; } }
     .blob { animation: blobFloat 12s ease-in-out infinite; }
     .glow { animation: glowPulse 6s ease-in-out infinite; }
   </style>
 </head>
-<body class="min-h-screen bg-brand-50 text-slate-900 font-ui">
-  <!-- ===== Top Navigation Bar (with reveal) ===== -->
-  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur-md reveal">
-    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <!-- Brand -->
-  <!-- Brand -->
-<a href="#home" class="flex items-center gap-1 md:gap-3 shrink-0">
-  <img
-    src="splash_logo_transparent_tight.png"
-    alt="Homer"
-    class="h-16 md:h-20 w-auto block object-contain"
-    loading="eager"
-  />
-  <span class="font-brand font-extrabold uppercase tracking-tight text-2xl md:text-3xl leading-none text-slate-900 -ml-2">
-    HOMER
-  </span>
-</a>
 
+<body class="min-h-screen bg-brand-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-ui">
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/70 border-b border-slate-200
+                 dark:supports-[backdrop-filter]:bg-slate-900/70 dark:bg-slate-900/70 dark:border-slate-800">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand (logo + wordmark) -->
+      <a href="#home" class="flex items-center gap-2 md:gap-3 shrink-0">
+        <img
+          src="splash_logo_transparent_tight.png"
+          alt="Homer"
+          class="h-16 md:h-20 w-auto block object-contain"
+          loading="eager"
+        />
+        <span class="font-brand font-extrabold uppercase tracking-tight text-2xl md:text-3xl leading-none text-slate-900 dark:text-white -ml-1">
+          HOMER
+        </span>
+      </a>
 
-      <!-- Desktop nav -->
-      <ul class="hidden md:flex items-center gap-6 text-sm font-semibold">
-        <li><a href="#home" class="hover:text-brand-700">Intro</a></li>
-        <li><a href="#features" class="hover:text-brand-700">Features</a></li>
-        <li><a href="#how" class="hover:text-brand-700">How it works</a></li>
-        <li><a href="#faq" class="hover:text-brand-700">FAQ</a></li>
-        <li><a href="affiliate.html" class="hover:text-brand-700">Affiliate</a></li>
-      </ul>
+      <!-- Desktop nav links -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#features" class="hover:text-brand-700 dark:hover:text-brand-300">Features</a>
+        <a href="#how" class="hover:text-brand-700 dark:hover:text-brand-300">How it works</a>
+        <a href="#faq" class="hover:text-brand-700 dark:hover:text-brand-300">FAQ</a>
+      </div>
 
-      <!-- Desktop CTA -->
-    <!-- Desktop CTA -->
-<div class="hidden md:flex items-center">
-  <a
-    href="affiliate.html"
-    class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-brand-500/50"
-  >
-    Homer Affiliate
-  </a>
-</div>
+      <!-- Right-side actions -->
+      <div class="flex items-center">
+        <!-- Desktop CTA: Homer Affiliate -->
+        <div class="hidden md:flex items-center">
+          <a
+            href="affiliate.html"
+            class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+          >
+            Homer Affiliate
+          </a>
+        </div>
 
-      <!-- Mobile menu button -->
-      <!-- Mobile menu button -->
-<button
-  id="navToggle"
-  aria-label="Open menu"
-  class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-300 p-2 text-slate-900"
->
-  <!-- Hamburger (shown by default) -->
-  <svg id="navIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-  </svg>
+        <!-- Theme toggle -->
+        <button
+          id="themeToggle"
+          type="button"
+          class="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100
+                 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+          aria-label="Toggle dark mode"
+        >
+          <!-- Sun (shown in dark to switch to light) -->
+          <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="4" />
+            <path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <!-- Moon (shown in light to switch to dark) -->
+          <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/>
+          </svg>
+        </button>
 
-  <!-- Close (hidden until menu opens) -->
-  <svg id="navIconClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6l-12 12"/>
-  </svg>
-</button>
-
+        <!-- Mobile hamburger -->
+        <button
+          id="navToggle"
+          aria-label="Open menu"
+          class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-300 p-2 text-slate-900 ml-2
+                 dark:border-slate-700 dark:text-slate-100"
+        >
+          <!-- Hamburger (shown by default) -->
+          <svg id="navIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <!-- Close (hidden until menu opens) -->
+          <svg id="navIconClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6l-12 12"/>
+          </svg>
+        </button>
+      </div>
     </nav>
 
-    <!-- Mobile drawer -->
-    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
-        <ul class="grid gap-3 text-sm font-semibold">
-          <li><a href="#home" class="block px-2 py-2 rounded-lg hover:bg-slate-50">Intro</a></li>
-          <li><a href="#features" class="block px-2 py-2 rounded-lg hover:bg-slate-50">Features</a></li>
-          <li><a href="#how" class="block px-2 py-2 rounded-lg hover:bg-slate-50">How it works</a></li>
-          <li><a href="#faq" class="block px-2 py-2 rounded-lg hover:bg-slate-50">FAQ</a></li>
-          <li><a href="affiliate.html" class="block px-2 py-2 rounded-lg hover:bg-slate-50">Affiliate</a></li>
-        </ul>
-        <div class="mt-4">
-  <a
-    href="affiliate.html"
-    class="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-brand-500/50"
-  >
-    Homer Affiliate
-  </a>
-</div>
-
+    <!-- Mobile menu (drawer) -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="grid gap-3">
+          <a href="#features" class="block px-3 py-2 rounded-lg font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Features</a>
+          <a href="#how" class="block px-3 py-2 rounded-lg font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">How it works</a>
+          <a href="#faq" class="block px-3 py-2 rounded-lg font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">FAQ</a>
+          <div class="mt-2">
+            <a
+              href="affiliate.html"
+              class="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-lg transition focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+            >
+              Homer Affiliate
+            </a>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section id="home" class="relative overflow-hidden min-h-[88vh] flex items-center">
+  <section id="home" class="scroll-mt-24 relative overflow-hidden min-h-[88vh] flex items-center">
     <div class="absolute inset-0">
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-100 via-white to-white"></div>
-      <div class="absolute -left-24 -top-24 w-[700px] h-[700px] bg-brand-200/40 rounded-full blur-3xl opacity-70 blob"></div>
-      <div class="absolute -right-32 bottom-0 w-[800px] h-[800px] bg-brand-300/30 rounded-full blur-3xl opacity-60 blob" style="animation-delay: -4s"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-100 via-white to-white
+                  dark:from-slate-900 dark:via-slate-950 dark:to-slate-950"></div>
+      <div class="absolute -left-24 -top-24 w-[700px] h-[700px] bg-brand-200/40 rounded-full blur-3xl opacity-70 blob
+                  dark:bg-brand-700/20"></div>
+      <div class="absolute -right-32 bottom-0 w-[800px] h-[800px] bg-brand-300/30 rounded-full blur-3xl opacity-60 blob
+                  dark:bg-brand-800/20" style="animation-delay: -4s"></div>
     </div>
+
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 md:pt-16 pb-6 md:pb-8 w-full">
       <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div class="reveal">
-          <h1 class="mt-4 text-5xl md:text-7xl font-black leading-[1.02] font-display reveal">
+        <div class="reveal" style="--d:120ms">
+          <h1 class="mt-4 text-5xl md:text-7xl font-black leading-[1.02] font-display">
             Pay. Prove. <span class="bg-gradient-to-r from-brand-700 to-brand-800 bg-clip-text text-transparent">Progress.</span>
           </h1>
-          <p class="mt-5 text-lg md:text-xl text-slate-700 max-w-xl reveal">
+          <p class="mt-5 text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-xl">
             Homer turns every on-time rent payment into momentum. Build a powerful <strong>Homer Score</strong>, unlock trust with owners, and keep your housing journey moving forward.
           </p>
-          <div class="mt-8 flex flex-wrap items-center gap-3 reveal"></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Features -->
-  <section id="features" class="pt-8 md:pt-10 pb-24 md:pb-28 bg-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl reveal"></div>
-      <div class="mt-10 reveal">
-        <h2 class="text-4xl md:text-5xl font-black">Features</h2>
+  <section id="features" class="scroll-mt-24 pt-8 md:pt-10 pb-24 md:pb-28 bg-white dark:bg-slate-950">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mt-10">
+      <h2 class="text-4xl md:text-5xl font-black reveal">Features</h2>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div
+        class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal
+               dark:border-slate-800 dark:bg-slate-900 dark:bg-none"
+        style="--d:100ms"
+      >
+        <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center dark:bg-slate-800 dark:text-brand-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+            <path d="M2 6h20v12H2z"/><path d="M4 10h6v2H4z" fill="white"/>
+          </svg>
+        </div>
+        <h3 class="mt-4 font-extrabold text-xl font-display">One-tap rent</h3>
+        <p class="mt-1 text-slate-600 dark:text-slate-300">UPI/Card with Razorpay. Reminders, receipts, GST invoices—done.</p>
+        <dotlottie-wc
+          src="https://lottie.host/64332859-7b73-44ab-a291-e3b837c540cc/pRkpgrNCZj.lottie"
+          style="width: 100%; height: 380px"
+          autoplay
+          loop
+        ></dotlottie-wc>
       </div>
-      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal">
-          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M2 6h20v12H2z"/><path d="M4 10h6v2H4z" fill="white"/></svg>
-          </div>
-          <h3 class="mt-4 font-extrabold text-xl font-display">One-tap rent</h3>
-          <p class="mt-1 text-slate-600">UPI/Card with Razorpay. Reminders, receipts, GST invoices—done.</p>
-          <dotlottie-wc src="https://lottie.host/64332859-7b73-44ab-a291-e3b837c540cc/pRkpgrNCZj.lottie" style="width: 100%;height: 380px" autoplay loop></dotlottie-wc>
+
+      <!-- Card 2 -->
+      <div
+        class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal
+               dark:border-slate-800 dark:bg-slate-900 dark:bg-none"
+        style="--d:220ms"
+      >
+        <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center dark:bg-slate-800 dark:text-brand-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+            <path d="M12 2 2 7l10 5 10-5-10-5zm0 7-10 5 10 5 10-5-10-5z"/>
+          </svg>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal">
-          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7-10 5 10 5 10-5-10-5z"/></svg>
-          </div>
-          <h3 class="mt-4 font-extrabold text-xl font-display">Homer Score</h3>
-          <p class="mt-1 text-slate-600">Prove reliability. Beat the queue. Get the house you want.</p>
-          <dotlottie-wc src="https://lottie.host/18d8d79f-c528-49e7-a405-45ae4431e950/ZigQgvHOv6.lottie" style="width: 100%;height: 380px" autoplay loop></dotlottie-wc>
+        <h3 class="mt-4 font-extrabold text-xl font-display">Homer Score</h3>
+        <p class="mt-1 text-slate-600 dark:text-slate-300">Prove reliability. Beat the queue. Get the house you want.</p>
+        <dotlottie-wc
+          src="https://lottie.host/18d8d79f-c528-49e7-a405-45ae4431e950/ZigQgvHOv6.lottie"
+          style="width: 100%; height: 380px"
+          autoplay
+          loop
+        ></dotlottie-wc>
+      </div>
+
+      <!-- Card 3 -->
+      <div
+        class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal
+               dark:border-slate-800 dark:bg-slate-900 dark:bg-none"
+        style="--d:340ms"
+      >
+        <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center dark:bg-slate-800 dark:text-brand-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+            <path d="M2 4h20v12H6l-4 4z"/>
+          </svg>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-sky-50 p-7 shadow-sm hover:shadow-lg transition reveal">
-          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7"><path d="M2 4h20v12H6l-4 4z"/></svg>
-          </div>
-          <h3 class="mt-4 font-extrabold text-xl font-display">Mutual reviews</h3>
-          <p class="mt-1 text-slate-600">Transparency both ways. Good tenants and good owners find each other.</p>
-          <dotlottie-wc src="https://lottie.host/7440deb9-5fcd-421a-922f-e3360af8d89e/kHtBXNs9mY.lottie" style="width: 100%; height: 380px" autoplay loop></dotlottie-wc>
-        </div>
+        <h3 class="mt-4 font-extrabold text-xl font-display">Mutual reviews</h3>
+        <p class="mt-1 text-slate-600 dark:text-slate-300">Transparency both ways. Good tenants and good owners find each other.</p>
+        <dotlottie-wc
+          src="https://lottie.host/7440deb9-5fcd-421a-922f-e3360af8d89e/kHtBXNs9mY.lottie"
+          style="width: 100%; height: 380px"
+          autoplay
+          loop
+        ></dotlottie-wc>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- How it works -->
-  <section id="how" class="py-20 md:py-28 bg-sky-50/60">
+  <section id="how" class="scroll-mt-24 py-20 md:py-28 bg-sky-50/60 dark:bg-slate-950">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl reveal">
-        <h2 class="text-4xl md:text-5xl font-black">From zero to verified—fast</h2>
-        <p class="mt-3 text-slate-600 text-lg">Create account, pay safely, share your score. That’s it.</p>
+      <div class="max-w-3xl">
+        <h2 class="text-4xl md:text-5xl font-black reveal">From zero to verified—fast</h2>
+        <p class="mt-3 text-slate-600 dark:text-slate-300 text-lg reveal" style="--d:120ms">Create account, pay safely, share your score. That’s it.</p>
       </div>
       <ol class="mt-12 grid md:grid-cols-4 gap-6">
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><div class="text-slate-400 font-black">01</div><h3 class="mt-2 font-extrabold">Create account</h3><p class="mt-1 text-sm text-slate-600">Phone + OTP. Add your property and due date.</p></li>
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><div class="text-slate-400 font-black">02</div><h3 class="mt-2 font-extrabold">Pay securely</h3><p class="mt-1 text-sm text-slate-600">UPI/Card via Razorpay. Receipts & invoices generated.</p></li>
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><div class="text-slate-400 font-black">03</div><h3 class="mt-2 font-extrabold">Get Homer Score</h3><p class="mt-1 text-sm text-slate-600">Your reliability grows—and so do your options.</p></li>
-        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><div class="text-slate-400 font-black">04</div><h3 class="mt-2 font-extrabold">Share & move</h3><p class="mt-1 text-sm text-slate-600">Show owners your score. Get approved faster.</p></li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:120ms">
+          <div class="text-slate-400 dark:text-slate-500 font-black">01</div>
+          <h3 class="mt-2 font-extrabold">Create account</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Phone + OTP. Add your property and due date.</p>
+        </li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:220ms">
+          <div class="text-slate-400 dark:text-slate-500 font-black">02</div>
+          <h3 class="mt-2 font-extrabold">Pay securely</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">UPI/Card via Razorpay. Receipts & invoices generated.</p>
+        </li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:320ms">
+          <div class="text-slate-400 dark:text-slate-500 font-black">03</div>
+          <h3 class="mt-2 font-extrabold">Get Homer Score</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Your reliability grows—and so do your options.</p>
+        </li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:420ms">
+          <div class="text-slate-400 dark:text-slate-500 font-black">04</div>
+          <h3 class="mt-2 font-extrabold">Share & move</h3>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Show owners your score. Get approved faster.</p>
+        </li>
       </ol>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-20 md:py-28 bg-sky-50/60">
+  <section id="faq" class="scroll-mt-24 py-20 md:py-28 bg-sky-50/60 dark:bg-slate-950">
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl md:text-5xl font-black text-center reveal">Frequently asked questions</h2>
       <div class="mt-12 grid md:grid-cols-2 gap-6">
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><h3 class="font-extrabold">Is Homer a wallet?</h3><p class="mt-2 text-sm text-slate-600">No. Homer uses trusted payment rails (e.g., Razorpay) to process rent and records your payment history and score.</p></div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><h3 class="font-extrabold">What is Homer Score?</h3><p class="mt-2 text-sm text-slate-600">A weighted score of on-time vs late vs missed rent payments. Sharing it helps owners quickly trust your profile.</p></div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><h3 class="font-extrabold">Are my payments secure?</h3><p class="mt-2 text-sm text-slate-600">Yes. We use PCI-compliant processors and never store sensitive card/UPI credentials on our servers.</p></div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal"><h3 class="font-extrabold">Can owners see my data?</h3><p class="mt-2 text-sm text-slate-600">Only what you choose to share—like your score, payment streak, and reviews.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:120ms">
+          <h3 class="font-extrabold">Is Homer a wallet?</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">No. Homer uses trusted payment rails (e.g., Razorpay) to process rent and records your payment history and score.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:220ms">
+          <h3 class="font-extrabold">What is Homer Score?</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">A weighted score of on-time vs late vs missed rent payments. Sharing it helps owners quickly trust your profile.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:320ms">
+          <h3 class="font-extrabold">Are my payments secure?</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Yes. We use PCI-compliant processors and never store sensitive card/UPI credentials on our servers.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal dark:border-slate-800 dark:bg-slate-900" style="--d:420ms">
+          <h3 class="font-extrabold">Can owners see my data?</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Only what you choose to share—like your score, payment streak, and reviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social -->
+  <section id="social" class="scroll-mt-24 py-16 md:py-20 bg-white dark:bg-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl md:text-5xl font-black text-center reveal">Follow us on social media</h2>
+      <p class="mt-3 text-slate-600 dark:text-slate-300 text-lg text-center reveal">Stay in the loop for updates, launches, and tips.</p>
+
+      <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-5">
+        <!-- X -->
+        <a href="#" aria-label="Follow on X"
+           class="reveal group rounded-2xl border border-slate-200 bg-white p-5 flex items-center justify-center gap-3 hover:border-brand-200 hover:bg-brand-50/50 hover:shadow transition
+                  dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800">
+          <svg viewBox="0 0 24 24" class="w-7 h-7 text-slate-900 group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-300" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 3H21l-6.52 7.46L22.5 21h-5.57l-4.36-5.28L7.37 21H4.61l6.98-7.98L1.5 3h5.69l3.95 4.79L18.24 3Zm-1.95 16h1.5L7.77 5.03H6.17L16.29 19Z"/>
+          </svg>
+          <span class="font-semibold text-slate-900 dark:text-slate-100">X</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="#" aria-label="Subscribe on YouTube"
+           class="reveal group rounded-2xl border border-slate-200 bg-white p-5 flex items-center justify-center gap-3 hover:border-brand-200 hover:bg-brand-50/50 hover:shadow transition
+                  dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800">
+          <svg viewBox="0 0 24 24" class="w-7 h-7 text-red-600" fill="currentColor" aria-hidden="true">
+            <path d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.7 3 12 3 12 3s-6.7 0-8.7.4A4 4 0 0 0 .5 6.2 41.5 41.5 0 0 0 0 12c0 1.9.2 3.8.5 5.8a4 4 0 0 0 2.8 2.8C5.3 21 12 21 12 21s6.7 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-2 .5-3.9.5-5.8 0-1.9-.2-3.8-.5-5.8ZM9.75 15.5v-7L16 12l-6.25 3.5Z"/>
+          </svg>
+          <span class="font-semibold text-slate-900 dark:text-slate-100">YouTube</span>
+        </a>
+
+        <!-- Facebook -->
+        <a href="#" aria-label="Follow on Facebook"
+           class="reveal group rounded-2xl border border-slate-200 bg-white p-5 flex items-center justify-center gap-3 hover:border-brand-200 hover:bg-brand-50/50 hover:shadow transition
+                  dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800">
+          <svg viewBox="0 0 24 24" class="w-7 h-7 text-[#1877F2]" fill="currentColor" aria-hidden="true">
+            <path d="M22 12.06C22 6.53 17.52 2 12 2S2 6.53 2 12.06C2 17.06 5.66 21.2 10.44 22v-7.04H7.9v-2.9h2.54V9.41c0-2.5 1.5-3.88 3.78-3.88 1.1 0 2.26.2 2.26.2v2.5h-1.27c-1.25 0-1.63.78-1.63 1.58v1.9h2.78l-.44 2.9h-2.34V22C18.34 21.2 22 17.06 22 12.06Z"/>
+          </svg>
+          <span class="font-semibold text-slate-900 dark:text-slate-100">Facebook</span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="#" aria-label="Follow on Instagram"
+           class="reveal group rounded-2xl border border-slate-200 bg-white p-5 flex items-center justify-center gap-3 hover:border-brand-200 hover:bg-brand-50/50 hover:shadow transition
+                  dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800">
+          <svg viewBox="0 0 24 24" class="w-7 h-7 text-pink-600" fill="currentColor" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11.001 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7.001 3.5 3.5 0 0 0 0-7ZM18 6.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+          </svg>
+          <span class="font-semibold text-slate-900 dark:text-slate-100">Instagram</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="#" aria-label="Follow on LinkedIn"
+           class="reveal group rounded-2xl border border-slate-200 bg-white p-5 flex items-center justify-center gap-3 hover:border-brand-200 hover:bg-brand-50/50 hover:shadow transition
+                  dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800">
+          <svg viewBox="0 0 24 24" class="w-7 h-7 text-[#0A66C2]" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5a2.5 2.5 0 1 1-.02 5.001 2.5 2.5 0 0 1 .02-5Zm-2 7h4v10h-4v-10Zm6 0h3.8v1.38h.05c.53-.95 1.84-1.95 3.8-1.95 4.06 0 4.81 2.67 4.81 6.13V21h-4v-4.42c0-1.05-.02-2.4-1.46-2.4-1.46 0-1.69 1.15-1.69 2.33V21h-4V10.5Z"/>
+          </svg>
+          <span class="font-semibold text-slate-900 dark:text-slate-100">LinkedIn</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200/80 py-10 bg-white reveal">
+  <footer class="border-t border-slate-200/80 dark:border-slate-800 py-10 bg-white dark:bg-slate-950">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="flex items-center gap-2 font-black">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-600"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
           HOMER
         </div>
-        <ul class="text-sm text-slate-600 grid sm:grid-cols-3 gap-x-6 gap-y-2">
-          <li><a class="hover:text-brand-700" href="#features">Features</a></li>
-          <li><a class="hover:text-brand-700" href="#faq">FAQ</a></li>
-          <li><a class="hover:text-brand-700" href="affiliate.html">Affiliate</a></li>
-          <li><a class="hover:text-brand-700" href="#">Privacy</a></li>
+        <ul class="text-sm text-slate-600 dark:text-slate-300 grid sm:grid-cols-3 gap-x-6 gap-y-2">
+          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="#features">Features</a></li>
+          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="#faq">FAQ</a></li>
+          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="affiliate.html">Affiliate</a></li>
+          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="#">Privacy</a></li>
         </ul>
       </div>
-      <div class="mt-6 text-xs text-slate-500">© <span id="year"></span> Homer App • Made in India</div>
+      <div class="mt-6 text-xs text-slate-500 dark:text-slate-400">© <span id="year"></span> Homer App • Made in India</div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-  <!-- ===== Updated stagger reveal (Option B) + mobile menu toggle ===== -->
-  <script>
-    const BASE_DELAY = 120;
-    const STEP_DELAY = 180;
-    const DURATION_MS = 1100;
 
-    const IO = new IntersectionObserver((entries)=>{
-      entries.forEach((entry)=>{
-        if(entry.isIntersecting){
-          const container = entry.target;
-
-          // Reveal the container itself if it has a reveal class
-          if (container.classList.contains('reveal') || container.classList.contains('reveal-zoom')) {
-            container.style.setProperty('--dur', DURATION_MS + 'ms');
-            container.style.setProperty('--d', BASE_DELAY + 'ms');
-            container.classList.add('show');
-          }
-
-          // Then reveal all children with stagger
-          const items = container.querySelectorAll('.reveal, .reveal-zoom');
-          items.forEach((el, i)=>{
-            el.style.setProperty('--dur', DURATION_MS + 'ms');
-            el.style.setProperty('--d', (BASE_DELAY + i * STEP_DELAY) + 'ms');
-            requestAnimationFrame(()=> el.classList.add('show'));
-          });
-
-          IO.unobserve(container);
+    // Intersection Observer for slow, smooth stagger
+    const IO = new IntersectionObserver((els) => {
+      els.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('show');
+          IO.unobserve(e.target);
         }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+      })
+    }, { threshold: 0.12 });
 
-    document.querySelectorAll('header, section, footer').forEach((scope)=> IO.observe(scope));
+    document.querySelectorAll('.reveal, .reveal-zoom').forEach((el, i) => {
+      if (!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (120 + i * 120) + 'ms');
+      IO.observe(el);
+    });
+
+    // Theme toggle
+    document.getElementById('themeToggle')?.addEventListener('click', () => {
+      const root = document.documentElement;
+      const nowDark = !root.classList.contains('dark');
+      root.classList.toggle('dark', nowDark);
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+    });
 
     // Mobile menu toggle
-    const btn = document.getElementById('navToggle');
-    const menu = document.getElementById('mobileMenu');
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
     const iconOpen = document.getElementById('navIconOpen');
     const iconClose = document.getElementById('navIconClose');
 
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const isHidden = menu.classList.contains('hidden');
-        menu.classList.toggle('hidden', !isHidden);
-        iconOpen.classList.toggle('hidden', !isHidden);
-        iconClose.classList.toggle('hidden', isHidden);
+    navToggle?.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !isHidden);
+      iconOpen.classList.toggle('hidden', !isHidden);
+      iconClose.classList.toggle('hidden', isHidden);
+    });
+
+    // Close mobile menu on nav click
+    mobileMenu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
       });
-    }
+    });
   </script>
-  <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"></script>
 </body>
 </html>

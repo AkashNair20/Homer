@@ -254,39 +254,64 @@
   }
 </style>
 
-<section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 overflow-hidden">
-  <!-- Removed nowrap & min-w; added our scaling helper -->
-  <div class="twins-scale mx-auto flex items-end justify-center gap-8">
-    <!-- Device A -->
-    <div class="relative -rotate-6 shrink-0">
-      <div class="relative rounded-[4rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
-           style="width:320px;">
-        <div class="relative w-full rounded-[3rem] overflow-hidden" style="aspect-ratio:9/19.5;">
-          <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt=""
+<!-- Two identical devices, locked side-by-side with a tighter gap -->
+<section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+  <!-- Tighter spacing: smaller gap + slight negative margins for overlap -->
+  <div class="flex flex-nowrap items-end justify-center gap-2 min-w-[660px]">
+
+    <!-- Device A (tilt left) -->
+    <div class="relative rotate-[-6deg] shrink-0 -mr-3">
+      <!-- Mock iPhone sized to the image's exact dimensions -->
+      <div id="phoneWrap"
+           class="relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
+           style="width: 320px;">
+        <!-- The inner frame keeps the corners nice -->
+        <div class="relative w-full rounded-[3.0rem] overflow-hidden"
+             style="aspect-ratio: var(--ar, 9/19.5);">
+          <!-- Edge-fill (for a filled look on odd aspect ratios) -->
+          <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="" aria-hidden="true"
                class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
-          <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="App screenshot"
+          <!-- Real screenshot (no cropping) -->
+          <img id="phoneShot" src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="App screenshot"
                class="relative z-10 w-full h-full object-contain" />
         </div>
+
+        <!-- Notch (optional—delete if you don’t want it) -->
         <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
       </div>
+
+      <!-- Subtle drop shadow on surface -->
       <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
     </div>
 
-    <!-- Device B -->
-    <div class="relative rotate-6 shrink-0">
-      <div class="relative rounded-[4rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
-           style="width:320px;">
-        <div class="relative w-full rounded-[3rem] overflow-hidden" style="aspect-ratio:9/19.5;">
-          <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.02.03.png" alt=""
+    <!-- Device B (tilt right) -->
+    <div class="relative rotate-[6deg] shrink-0 -ml-3">
+      <!-- Mock iPhone sized to the image's exact dimensions -->
+      <div id="phoneWrap"
+           class="relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
+           style="width: 320px;">
+        <!-- The inner frame keeps the corners nice -->
+        <div class="relative w-full rounded-[3.0rem] overflow-hidden"
+             style="aspect-ratio: var(--ar, 9/19.5);">
+          <!-- Edge-fill (for a filled look on odd aspect ratios) -->
+          <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.02.03.png" alt="" aria-hidden="true"
                class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
-          <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.02.03.png" alt="App screenshot"
+          <!-- Real screenshot (no cropping) -->
+          <img id="phoneShot" src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.02.03.png" alt="App screenshot"
                class="relative z-10 w-full h-full object-contain" />
         </div>
+
+        <!-- Notch (optional—delete if you don’t want it) -->
         <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
       </div>
+
+      <!-- Subtle drop shadow on surface -->
       <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
     </div>
+
   </div>
+</section>
+
 
 
 

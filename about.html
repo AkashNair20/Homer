@@ -507,27 +507,47 @@
       localStorage.setItem('theme', nowDark ? 'dark' : 'light');
     });
 
-    // Mobile menu toggle
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const iconOpen = document.getElementById('navIconOpen');
-    const iconClose = document.getElementById('navIconClose');
+  const navToggle  = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen   = document.getElementById('navIconOpen');  // ≡
+  const iconClose  = document.getElementById('navIconClose');  // ✕
 
-    navToggle?.addEventListener('click', () => {
-      const isHidden = mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden', !isHidden);
-      iconOpen.classList.toggle('hidden', !isHidden);
-      iconClose.classList.toggle('hidden', isHidden);
-    });
+  // Ensure icons match initial state on load
+  (function initMenuIcon(){
+    const isOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
+    iconOpen?.classList.toggle('hidden', isOpen);   // hide hamburger if open
+    iconClose?.classList.toggle('hidden', !isOpen); // show X if open
+    navToggle?.setAttribute('aria-expanded', String(isOpen));
+    navToggle?.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  })();
 
-    // Close mobile menu on nav click
-    mobileMenu?.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        iconOpen.classList.remove('hidden');
-        iconClose.classList.add('hidden');
-      });
+  navToggle?.addEventListener('click', () => {
+    // If currently hidden, it WILL open
+    const willOpen = mobileMenu.classList.contains('hidden');
+
+    // Toggle menu
+    mobileMenu.classList.toggle('hidden', !willOpen);
+
+    // Toggle icons (this was inverted before)
+    iconOpen.classList.toggle('hidden', willOpen);   // hide hamburger when opening
+    iconClose.classList.toggle('hidden', !willOpen); // show X when opening
+
+    // A11y
+    navToggle.setAttribute('aria-expanded', String(willOpen));
+    navToggle.setAttribute('aria-label', willOpen ? 'Close menu' : 'Open menu');
+  });
+
+  // Close menu when a link is clicked (and reset icons correctly)
+  mobileMenu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open menu');
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>

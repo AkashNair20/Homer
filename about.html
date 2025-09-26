@@ -53,6 +53,15 @@
     }
   </script>
 
+  <!-- Force start at top on first load; prevent scroll restoration jumps -->
+  <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (!location.hash) {
+      window.addEventListener('load', () => window.scrollTo(0, 0));
+      window.addEventListener('pageshow', (e) => { if (e.persisted) window.scrollTo(0, 0); });
+    }
+  </script>
+
   <!-- Set initial theme before paint (persisted or OS pref) -->
   <script>
     (() => {
@@ -68,6 +77,9 @@
 
   <style>
     html { scroll-behavior: smooth; }
+    /* stop the browser from “anchoring” scroll as content above loads */
+    html, body { overflow-anchor: none; }
+
     .btn-primary { @apply px-7 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold shadow hover:shadow-xl transition; }
     .btn-secondary { @apply px-7 py-3 rounded-2xl bg-white border-2 border-slate-300 font-semibold hover:border-slate-400; }
     .chip { @apply inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-sky-900 bg-sky-100 px-3 py-1 rounded-full; }
@@ -88,38 +100,25 @@
     @keyframes glowPulse { 0%,100% { opacity:.55; } 50% { opacity:.75; } }
     .blob { animation: blobFloat 12s ease-in-out infinite; }
     .glow { animation: glowPulse 6s ease-in-out infinite; }
+
+    /* Autoscale the twin phones on small screens so they never overflow */
+    .phones-scale{
+      --total: 624;
+      --pad: 24;
+      --scale: min(1, (100vw - (var(--pad) * 1px)) / (var(--total) * 1px));
+      transform: scale(var(--scale));
+      transform-origin: top center;
+      width: calc(var(--total) * var(--scale) * 1px);
+      overflow: visible;
+    }
+    @media (min-width: 768px){
+      .phones-scale{
+        transform: none;
+        width: auto;
+        overflow: visible;
+      }
+    }
   </style>
-  <script>
-  (function () {
-    const wrap = document.getElementById('phoneWrap');
-    const shot = document.getElementById('phoneShot');
-    if (!wrap || !shot) return;
-
-    const img = new Image();
-    img.src = shot.currentSrc || shot.src;
-    img.onload = () => {
-      const w = img.naturalWidth;
-      const h = img.naturalHeight;
-
-      // 1) Exact aspect ratio from the image
-      wrap.style.setProperty('--ar', (w / h));
-
-      // 2) Rendered width = image width (but responsive-capped)
-      //    Feel free to adjust the max width cap
-      const maxWidth = Math.min(w, 480); // cap at 480px for layout
-      wrap.style.width = maxWidth + 'px';
-
-      // 3) On very narrow screens, ensure it still fits
-      const updateForViewport = () => {
-        const vwCap = Math.min(window.innerWidth - 32, maxWidth); // some side padding
-        wrap.style.width = Math.min(maxWidth, vwCap) + 'px';
-      };
-      updateForViewport();
-      window.addEventListener('resize', updateForViewport);
-    };
-  })();
-  
-</script>
 
 </head>
 
@@ -129,16 +128,14 @@
                  dark:supports-[backdrop-filter]:bg-slate-900/70 dark:bg-slate-900/70 dark:border-slate-800">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <!-- Brand (logo + wordmark) -->
-      <a href="#home" class="flex items-center gap-2 md:gap-3 shrink-0">
+      <a href="main.html" class="flex items-center h-12 md:h-14 lg:h-16 shrink-0">
         <img
-          src="splash_logo_transparent_tight.png"
+          src="./HOMER (6).png"
           alt="Homer"
-          class="h-16 md:h-20 w-auto block object-contain"
+          class="h-full w-auto block object-contain"
           loading="eager"
+          decoding="async"
         />
-        <span class="font-brand font-extrabold uppercase tracking-tight text-2xl md:text-3xl leading-none text-slate-900 dark:text-white -ml-1">
-          HOMER
-        </span>
       </a>
 
       <!-- Desktop nav links -->
@@ -160,25 +157,6 @@
             Homer Affiliate
           </a>
         </div>
-
-        <!-- Theme toggle -->
-        <button
-          id="themeToggle"
-          type="button"
-          class="ml-3 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100
-                 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-          aria-label="Toggle dark mode"
-        >
-          <!-- Sun (shown in dark to switch to light) -->
-          <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="4" />
-            <path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-          </svg>
-          <!-- Moon (shown in light to switch to dark) -->
-          <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/>
-          </svg>
-        </button>
 
         <!-- Mobile hamburger -->
         <button
@@ -220,7 +198,7 @@
   </header>
 
   <!-- Hero -->
-  <section id="home" class="scroll-mt-24 relative overflow-hidden min-h-[88vh] flex items-center">
+  <section id="home" class="scroll-mt-24 relative overflow-hidden min-h-[100svh] flex items-center">
     <div class="absolute inset-0">
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-100 via-white to-white
                   dark:from-slate-900 dark:via-slate-950 dark:to-slate-950"></div>
@@ -231,124 +209,53 @@
     </div>
 
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 md:pt-16 pb-6 md:pb-8 w-full">
-     <div class="grid md:grid-cols-2 gap-10 items-center">
-  <!-- Left: intro copy -->
-  <div class="reveal">
-    <h1 class="mt-4 text-5xl md:text-7xl font-black leading-[1.02] font-display">
-      Pay. Prove. <span class="bg-gradient-to-r from-brand-700 to-brand-800 bg-clip-text text-transparent">Progress.</span>
-    </h1>
-    <p class="mt-5 text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-xl">
-      Homer turns every on-time rent payment into momentum. Build a powerful <strong>Homer Score</strong>, unlock trust with owners, and keep your housing journey moving forward.
-    </p>
-  </div>
-  <!-- Add this once (in your page <head> or before the section) -->
-<style>
-  /* Scales the twin-phones row to never exceed viewport width */
-  .twins-scale {
-    --total: 700px;                 /* approx total width of both phones + gap */
-    --pad: 24px;                    /* breathing room inside viewport */
-    --scale: min(1, calc((100vw - var(--pad)) / var(--total)));
-    transform: scale(var(--scale));
-    transform-origin: top center;
-    width: calc(var(--total) * var(--scale));
-  }
-</style>
-
-<!-- Two identical devices, locked side-by-side with a tighter gap + mobile autoscale (no clipping) -->
-<section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-  <!-- SCALE WRAPPER: visually scales down on small screens (overflow visible so nothing gets cut) -->
-  <div class="phones-scale mx-auto">
-    <!-- Force side-by-side: no wrap; min-width only from md and up -->
-    <div class="flex flex-nowrap items-end justify-center gap-2 min-w-0 md:min-w-[660px]">
-
-      <!-- Device A (tilt left) -->
-      <div class="relative rotate-[-6deg] shrink-0 -mr-3">
-        <!-- Mock iPhone sized to the image's exact dimensions -->
-        <div id="phoneWrap"
-             class="relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
-             style="width: 320px;">
-          <!-- The inner frame keeps the corners nice -->
-          <div class="relative w-full rounded-[3.0rem] overflow-hidden"
-               style="aspect-ratio: var(--ar, 9/19.5);">
-            <!-- Edge-fill (for a filled look on odd aspect ratios) -->
-            <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="" aria-hidden="true"
-                 class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
-            <!-- Real screenshot (no cropping) -->
-            <img id="phoneShot" src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="App screenshot"
-                 class="relative z-10 w-full h-full object-contain" />
-          </div>
-
-          <!-- Notch (optional—delete if you don’t want it) -->
-          <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <!-- Left: intro copy -->
+        <div class="reveal">
+          <h1 class="mt-4 text-5xl md:text-7xl font-black leading-[1.02] font-display">
+            Pay. Prove. <span class="bg-gradient-to-r from-brand-700 to-brand-800 bg-clip-text text-transparent">Progress.</span>
+          </h1>
+          <p class="mt-5 text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-xl">
+            Homer turns every on-time rent payment into momentum. Build a powerful <strong>Homer Score</strong>, unlock trust with owners, and keep your housing journey moving forward.
+          </p>
         </div>
 
-        <!-- Subtle drop shadow on surface -->
-        <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
-      </div>
+        <!-- Right: twin phones -->
+        <section class="relative mx-auto max-w-7xl py-10">
+          <div class="phones-scale mx-auto">
+            <div class="flex flex-nowrap items-end justify-center gap-2 min-w-0 md:min-w-[660px]">
+              <!-- Device A -->
+              <div class="relative rotate-[-6deg] shrink-0 -mr-3">
+                <div class="phoneWrap relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden" style="width: 320px;">
+                  <div class="relative w-full rounded-[3.0rem] overflow-hidden" style="aspect-ratio: var(--ar, 9/19.5);">
+                    <img src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="" aria-hidden="true"
+                         class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
+                    <img class="phoneShot relative z-10 w-full h-full object-contain"
+                         src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.01.41.png" alt="App screenshot" />
+                  </div>
+                  <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
+              </div>
 
-      <!-- Device B (tilt right) -->
-      <div class="relative rotate-[6deg] shrink-0 -ml-3">
-        <!-- Mock iPhone sized to the image's exact dimensions -->
-        <div id="phoneWrap"
-             class="relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden"
-             style="width: 320px;">
-          <!-- The inner frame keeps the corners nice -->
-          <div class="relative w-full rounded-[3.0rem] overflow-hidden"
-               style="aspect-ratio: var(--ar, 9/19.5);">
-            <!-- Edge-fill (for a filled look on odd aspect ratios) -->
-            <img src="" alt="" aria-hidden="true"
-                 class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
-            <!-- Real screenshot (no cropping) -->
-            <img id="phoneShot" src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.02.03.png" alt="App screenshot"
-                 class="relative z-10 w-full h-full object-contain" />
+              <!-- Device B -->
+              <div class="relative rotate-[6deg] shrink-0 -ml-3">
+                <div class="phoneWrap relative rounded-[4.0rem] border-[7px] border-slate-900 shadow-2xl bg-black overflow-hidden" style="width: 320px;">
+                  <div class="relative w-full rounded-[3.0rem] overflow-hidden" style="aspect-ratio: var(--ar, 9/19.5);">
+                    <img src="" alt="" aria-hidden="true"
+                         class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-70" />
+                    <img class="phoneShot relative z-10 w-full h-full object-contain"
+                         src="./Simulator Screenshot - iPhone 16 Plus - 2025-09-22 at 19.02.03.png" alt="App screenshot" />
+                  </div>
+                  <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <!-- Notch (optional—delete if you don’t want it) -->
-          <div class="absolute top-[8px] left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900/95 rounded-b-2xl"></div>
-        </div>
-
-        <!-- Subtle drop shadow on surface -->
-        <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-28 h-2 rounded-full bg-black/30 blur-md"></div>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<style>
-  /* Autoscale the twin phones on small screens so they never overflow.
-     Keep overflow visible so rotated/absolute parts aren't clipped. */
-  .phones-scale{
-    /* Two 320px phones + gap(8px) - overlaps(24px from -mr-3 & -ml-3) ≈ 624px total */
-    --total: 624;     /* visual width in px of the row at 1x */
-    --pad: 24;        /* keep a little side padding inside viewport */
-    --scale: min(1, (100vw - (var(--pad) * 1px)) / (var(--total) * 1px));
-
-    transform: scale(var(--scale));
-    transform-origin: top center;
-
-    /* match layout width to scaled visual width (prevents horizontal scroll) */
-    width: calc(var(--total) * var(--scale) * 1px);
-
-    /* critical: allow rotated bits & shadows to render outside */
-    overflow: visible;
-  }
-
-  /* On medium+ screens, show at full size with normal layout */
-  @media (min-width: 768px){
-    .phones-scale{
-      transform: none;
-      width: auto;
-      overflow: visible; /* keep visible just in case */
-    }
-  }
-</style>
-
-
-
-
-
-
     </div>
   </section>
 
@@ -481,7 +388,7 @@
   </section>
 
   <!-- Social -->
-  <section id="social" class="scroll-mt-24 py-16 md:py-20 bg-white dark:bg-slate-950">
+  <section id="social" class="scroll-mt-24 py-16 md:py-20 bg-blue dark:bg-slate-950">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl md:text-5xl font-black text-center reveal">Follow us on social media</h2>
       <p class="mt-3 text-slate-600 dark:text-slate-300 text-lg text-center reveal">Stay in the loop for updates, launches, and tips.</p>
@@ -541,23 +448,32 @@
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200/80 dark:border-slate-800 py-10 bg-white dark:bg-slate-950">
+  <footer class="border-t border-slate-200/80 dark:border-slate-800 py-6 bg-white dark:bg-slate-950">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div class="flex items-center gap-2 font-black">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-600"><path d="M12 3.172 3 9.172V21h6v-6h6v6h6V9.172l-9-6z"/></svg>
-          HOMER
-        </div>
+        <!-- Logo: fixed height, image fits perfectly -->
+        <a href="#home" class="flex items-center h-20 md:h-20 shrink-0">
+          <img
+            src="splash_logo_transparent_tight.png"
+            alt="Homer"
+            class="h-full w-auto block object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+
         <ul class="text-sm text-slate-600 dark:text-slate-300 grid sm:grid-cols-3 gap-x-6 gap-y-2">
-          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="#features">Features</a></li>
-          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="#faq">FAQ</a></li>
-          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="affiliate.html">Affiliate</a></li>
-          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="#">Privacy</a></li>
+          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="about.html">About & Contact</a></li>
         </ul>
       </div>
-      <div class="mt-6 text-xs text-slate-500 dark:text-slate-400">© <span id="year"></span> Homer App • Made in India</div>
+
+      <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+        © <span id="year"></span> Homer App • Made in India
+      </div>
     </div>
   </footer>
+
+
 
   <!-- Scripts -->
   <script>

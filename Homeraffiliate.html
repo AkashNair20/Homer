@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Homer Affiliate — Brokers & Agents</title>
+  <meta name="description" content="Join the invite-only Homer Affiliate program for brokers and agents. Earn recurring revenue by referring tenants, owners, and societies/PGs." />
+  <link rel="canonical" href="https://example.com/affiliate.html" />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- OG/Twitter -->
+  <meta property="og:title" content="Homer Affiliate — Brokers & Agents" />
+  <meta property="og:description" content="Earn recurring revenue by helping great tenants find great homes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/affiliate.html" />
+  <meta property="og:image" content="https://example.com/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lottie Web Component -->
+  <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: ['class'],
+      theme: {
+        extend: {
+          fontFamily: {
+            ui: ['Poppins','ui-sans-serif','system-ui'],
+            display: ['Space Grotesk','Poppins','ui-sans-serif'],
+            tech: ['JetBrains Mono','ui-monospace','SFMono-Regular'],
+          },
+          colors: {
+            brand: {
+              50:'#eef9ff',100:'#d7f0ff',200:'#b2e3ff',300:'#7fd0ff',400:'#45b7ff',
+              500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#0b4491',900:'#0a2a6b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{ --reveal: 420ms; --ease: cubic-bezier(.22,.9,.22,1); }
+    body { opacity:0; transform: translateY(6px); transition: opacity var(--reveal) var(--ease), transform var(--reveal) var(--ease); }
+    body.ready { opacity:1; transform:none; }
+    .reveal{ opacity:0; transform: translateY(10px) scale(.985); transition: opacity 460ms ease, transform 460ms var(--ease); transition-delay: var(--d,0ms); will-change: opacity, transform; }
+    .reveal.show{ opacity:1; transform:none; }
+    .reveal-zoom{ opacity:0; transform: scale(.965); transition: opacity 520ms ease, transform 520ms var(--ease); transition-delay: var(--d,0ms); will-change: opacity, transform; }
+    .reveal-zoom.show{ opacity:1; transform:none; }
+    @keyframes blobFloat { 0%{transform:translate3d(0,0,0) scale(1);} 50%{transform:translate3d(20px,-20px,0) scale(1.05);} 100%{transform:translate3d(0,0,0) scale(1);} }
+    .blob { animation: blobFloat 12s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce){
+      body, .reveal, .reveal-zoom { transition: none !important; transform: none !important; }
+      .blob { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-brand-50 text-slate-900 font-ui antialiased">
+ 
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+   <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between" aria-label="Primary">
+
+     <a href="main.html" class="flex items-center h-12 md:h-14 lg:h-16 shrink-0">
+      <img src="HOMER (6).png" alt="Homer" class="h-full w-auto block object-contain" loading="eager" decoding="async" />
+    </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#features" class="hover:text-brand-700">Features</a>
+        <a href="#how" class="hover:text-brand-700">How it works</a>
+        <a href="#faq" class="hover:text-brand-700">FAQ</a>
+        <a href="about.html" class="hover:text-brand-700">About & Contact</a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button id="nav-toggle"
+              class="md:hidden inline-flex items-center justify-center rounded-xl p-2 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
+              aria-label="Open menu"
+              aria-controls="nav-menu"
+              aria-expanded="false"
+              type="button">
+        <svg class="h-6 w-6 text-slate-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile drawer (slide-down) -->
+    <div id="nav-menu"
+         class="md:hidden pointer-events-none opacity-0 -translate-y-3 transition duration-300 ease-out border-t border-slate-200 bg-white/90 backdrop-blur-sm"
+         role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+        <div class="flex items-center justify-between">
+          <span class="font-black tracking-tight">Menu</span>
+          <button id="nav-close"
+                  class="inline-flex items-center justify-center rounded-xl p-2 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
+                  aria-label="Close menu" type="button">
+            <svg class="h-6 w-6 text-slate-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="mt-2 grid gap-1 text-sm font-semibold">
+          <a class="block rounded-lg px-3 py-2 hover:bg-slate-100" href="#features">Features</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-slate-100" href="#how">How it works</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-slate-100" href="#faq">FAQ</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-slate-100" href="about.html">About</a>
+          <a class="block rounded-lg px-3 py-2 hover:bg-slate-100" href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden min-h-[68vh] flex items-center scroll-mt-24">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-100 via-white to-white"></div>
+      <div class="absolute -left-24 -top-24 w-[700px] h-[700px] bg-brand-200/40 rounded-full blur-3xl opacity-70 blob"></div>
+      <div class="absolute -right-32 bottom-0 w-[800px] h-[800px] bg-brand-300/30 rounded-full blur-3xl opacity-60 blob" style="animation-delay:-4s"></div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <!-- LEFT: Copy -->
+        <div class="max-w-3xl">
+          <h1 class="mt-3 font-display text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight reveal" style="--d:120ms">Homer Affiliate</h1>
+
+          <h1 class="mt-4 font-display text-4xl md:text-5xl font-black reveal" style="--d:80ms">
+            Earn <span class="bg-gradient-to-r from-brand-700 to-brand-800 bg-clip-text text-transparent">recurring revenue</span> by helping great tenants find great homes.
+          </h1>
+          
+          <p class="mt-5 text-lg md:text-xl text-slate-700 reveal" style="--d:160ms">
+            Join Homer's invite-only program for registered brokers and agents. Refer tenants and owners—get rewarded as they stay active.
+          </p>
+          <div class="mt-8 flex items-center gap-3 reveal" style="--d:220ms">
+            <a href="#apply" class="px-6 py-3 rounded-2xl bg-slate-900 text-white font-semibold hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900">Apply now</a>
+            <a href="#how" class="px-6 py-3 rounded-2xl border-2 border-slate-300 font-semibold hover:border-slate-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400">How it works</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Lottie -->
+        <div class="flex md:justify-end justify-center reveal-zoom" style="--d:120ms">
+          <dotlottie-wc
+            src="https://lottie.host/64e647dc-d574-4535-a0f6-b862247bc785/DLWcQXaesM.lottie"
+            autoplay loop
+            style="width:min(520px, 100%); height:auto; aspect-ratio:1/1;"
+            aria-label="Animated illustration">
+          </dotlottie-wc>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="border-t border-slate-200">
+
+  <!-- Why Partner -->
+  <section id="features" class="py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl md:text-4xl font-black reveal">Why partner with Homer</h2>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <article class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal">
+          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 13h18v2H3z"/><path d="M11 3h2v18h-2z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-xl font-display">Recurring revenue</h3>
+          <p class="mt-1 text-slate-600">Earn as your referred users continue to use Homer—month after month.</p>
+        </article>
+
+        <article class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms">
+          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-xl font-display">Trust that compounds</h3>
+          <p class="mt-1 text-slate-600">The Homer Score helps you close faster with transparent, verified histories.</p>
+        </article>
+
+        <article class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:160ms">
+          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4h18v2H3z"/><path d="M3 9h18v11H3z"/></svg>
+          </div>
+          <h3 class="mt-4 font-extrabold text-xl font-display">Simple tools</h3>
+          <p class="mt-1 text-slate-600">Clean dashboards, easy verification, and support when you need it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="py-16 bg-sky-50/60 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl md:text-4xl font-black reveal">How it works</h2>
+      <ol class="mt-10 grid md:grid-cols-4 gap-6">
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal">
+          <div class="text-slate-400 font-black">01</div>
+          <h3 class="mt-2 font-extrabold">Apply</h3>
+          <p class="mt-1 text-sm text-slate-600">If you’re a registered broker/agent, submit the quick form below.</p>
+        </li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms">
+          <div class="text-slate-400 font-black">02</div>
+          <h3 class="mt-2 font-extrabold">Get your link</h3>
+          <p class="mt-1 text-sm text-slate-600">We’ll share your unique referral link and onboarding steps.</p>
+        </li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:160ms">
+          <div class="text-slate-400 font-black">03</div>
+          <h3 class="mt-2 font-extrabold">Refer</h3>
+          <p class="mt-1 text-sm text-slate-600">Invite tenants and owners to start on Homer.</p>
+        </li>
+        <li class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:240ms">
+          <div class="text-slate-400 font-black">04</div>
+          <h3 class="mt-2 font-extrabold">Earn</h3>
+          <p class="mt-1 text-sm text-slate-600">As they remain active, your rewards continue—no hard sell.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Eligibility -->
+  <section id="eligibility" class="py-16 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl md:text-4xl font-black reveal">Eligibility</h2>
+      <div class="mt-6 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms">
+        <ul class="space-y-3 text-slate-700 text-lg list-disc ps-5">
+          <li>You are a <strong>registered broker/agent</strong> with valid identification.</li>
+          <li>You operate ethically and prioritize tenant/owner transparency.</li>
+          <li>You agree to Homer’s basic brand and referral guidelines.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apply / Contact form -->
+  <section id="apply" class="py-16 bg-white scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-8 items-start">
+      <div class="lg:col-span-2">
+        <h2 class="font-display text-3xl md:text-4xl font-black">Apply to Homer Affiliate</h2>
+        <p class="mt-3 text-slate-600">Tell us a bit about your brokerage and we’ll get you set up.</p>
+
+        <form id="affiliateForm" class="mt-8 grid gap-4" aria-describedby="form-note" novalidate>
+          <!-- Web3Forms core -->
+          <input type="hidden" name="access_key" value="abd55b30-1a4e-4ba9-9186-21a6d87b6538" />
+          <input type="hidden" name="subject" value="Homer Affiliate — New Application" />
+          <input type="hidden" name="from_name" value="Homer Website" />
+          <input type="hidden" name="form_name" value="Affiliate Application" />
+
+          <!-- Honeypots -->
+          <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="text" name="website"  class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="sr-only">Full name</span>
+              <input id="f-name" name="name" required
+                class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500"
+                placeholder="Full name" />
+            </label>
+            <label class="block">
+              <span class="sr-only">Email</span>
+              <input id="f-email" name="email" type="email" required
+                class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500"
+                placeholder="Email" />
+            </label>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="sr-only">Phone (WhatsApp)</span>
+              <input id="f-phone" name="phone" inputmode="tel"
+                class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500"
+                placeholder="Phone (WhatsApp)" />
+            </label>
+            <label class="block">
+              <span class="sr-only">Brokerage / Agency name</span>
+              <input id="f-agency" name="agency"
+                class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500"
+                placeholder="Brokerage / Agency name" />
+            </label>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="sr-only">Registration ID / RERA</span>
+              <input id="f-regid" name="regid"
+                class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500"
+                placeholder="Registration ID / RERA (if applicable)" />
+            </label>
+            <label class="block">
+              <span class="sr-only">City</span>
+              <select id="f-city" name="city"
+                class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500">
+                <option value="">City</option>
+                <option>Bengaluru</option>
+                <option>Mumbai</option>
+                <option>Pune</option>
+                <option>Delhi NCR</option>
+                <option>Hyderabad</option>
+                <option>Chennai</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="block">
+            <span class="sr-only">About your portfolio</span>
+            <textarea id="f-about" name="about" rows="5"
+              class="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-sky-500"
+              placeholder="Tell us about your portfolio (rentals and typical monthly volume)."></textarea>
+          </label>
+
+          <div class="flex items-center gap-3">
+            <button id="affiliateSubmit" type="submit"
+              class="px-6 py-3 rounded-2xl bg-slate-900 text-white font-semibold hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900">
+              Submit application
+            </button>
+            <a href="#faq" class="px-6 py-3 rounded-2xl border-2 border-slate-300 font-semibold hover:border-slate-400">FAQ</a>
+          </div>
+
+          <!-- Status + Preview -->
+          <div id="form-status" class="hidden mt-3 rounded-xl border px-4 py-3 text-sm" role="status" aria-live="polite"></div>
+          <pre id="form-debug" class="hidden"></pre>
+
+          <p id="form-note" class="text-xs text-slate-500 mt-1">
+            By applying you agree to our <a href="#" class="underline">Terms</a> and <a href="#" class="underline">Privacy Policy</a>.
+          </p>
+        </form>
+      </div>
+
+      <aside class="rounded-3xl border border-slate-200 bg-sky-50 p-7 shadow-sm lg:sticky lg:top-20">
+        <h3 class="text-xl font-extrabold">Program snapshot</h3>
+        <ul class="mt-3 space-y-2 text-slate-700">
+          <li>• Recurring rewards as referrals stay active</li>
+          <li>• Works for tenants and owners</li>
+          <li>• Fast onboarding and clear guidelines</li>
+          <li>• Dedicated partner support</li>
+        </ul>
+        <div class="mt-6 rounded-2xl bg-white border border-slate-200 p-4 text-sm text-slate-600">
+          <strong>Note:</strong> We don’t advertise specific payouts publicly. Approved affiliates will receive full details.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 bg-sky-50/60 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl md:text-4xl font-black reveal">Affiliate FAQ</h2>
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal">
+          <h3 class="font-extrabold">Who can join?</h3>
+          <p class="mt-2 text-sm text-slate-600">Registered brokers/agents who follow ethical standards and value transparency.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:80ms">
+          <h3 class="font-extrabold">What do I earn?</h3>
+          <p class="mt-2 text-sm text-slate-600">It’s recurring and aligned to ongoing activity. Specifics are shared after approval.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:160ms">
+          <h3 class="font-extrabold">How do I track referrals?</h3>
+          <p class="mt-2 text-sm text-slate-600">You’ll receive a unique link and periodic reports. Support is available as needed.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm reveal" style="--d:240ms">
+          <h3 class="font-extrabold">Is there a quota?</h3>
+          <p class="mt-2 text-sm text-slate-600">No quotas. Focus on quality referrals and long-term relationships.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800 py-6 bg-white dark:bg-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <a href="main.html" class="flex items-center h-20 md:h-20 shrink-0">
+          <img src="splash_logo_transparent_tight.png" alt="Homer" class="h-full w-auto block object-contain" loading="lazy" decoding="async" />
+        </a>
+
+        <ul class="text-sm text-slate-600 dark:text-slate-300 grid sm:grid-cols-3 gap-x-6 gap-y-2">
+          <li><a class="hover:text-brand-700 dark:hover:text-brand-300" href="about.html">About & Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+        © <span id="year"></span> Homer App • Made in India
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year + page reveal
+    document.getElementById('year').textContent = new Date().getFullYear();
+    window.addEventListener('load', ()=> document.body.classList.add('ready'));
+
+    // Intersection Observer (staggered)
+    const IO = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); IO.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reveal, .reveal-zoom').forEach((el,i)=>{
+      if(!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (80 + i*40)+'ms');
+      IO.observe(el);
+    });
+
+    // Mobile nav with slide-down animation
+    const menu = document.getElementById('nav-menu');
+    const toggle = document.getElementById('nav-toggle');
+    const closeBtn = document.getElementById('nav-close');
+
+    function openMenu(){
+      menu.classList.remove('pointer-events-none');
+      menu.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      requestAnimationFrame(() => {
+        menu.classList.remove('opacity-0','-translate-y-3');
+      });
+      document.addEventListener('keydown', onEsc);
+      document.addEventListener('click', onClickOutside, { capture: true });
+    }
+    function closeMenu(){
+      menu.classList.add('-translate-y-3','opacity-0');
+      toggle.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-hidden','true');
+      setTimeout(()=> menu.classList.add('pointer-events-none'), 300);
+      document.removeEventListener('keydown', onEsc);
+      document.removeEventListener('click', onClickOutside, { capture: true });
+    }
+    function onEsc(e){ if(e.key === 'Escape') closeMenu(); }
+    function onClickOutside(e){
+      if(!menu.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+    }
+
+    toggle?.addEventListener('click', ()=>{
+      const opening = menu.classList.contains('pointer-events-none');
+      opening ? openMenu() : closeMenu();
+    });
+    closeBtn?.addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  </script>
+
+  <!-- Web3Forms submit -->
+  <script>
+  (function () {
+    const form = document.getElementById('affiliateForm');
+    const btn  = document.getElementById('affiliateSubmit');
+    const box  = document.getElementById('form-status');
+    const dbg  = document.getElementById('form-debug');
+
+    if (!form) return;
+
+    const val = (name) => (form.querySelector(`[name="${name}"]`)?.value || '').trim();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation(); // ✅ ensure no other submit handler interferes
+
+      const payload = {
+        access_key: form.querySelector('[name="access_key"]').value,
+        subject:    form.querySelector('[name="subject"]').value,
+        from_name:  form.querySelector('[name="from_name"]').value,
+        form_name:  form.querySelector('[name="form_name"]').value,
+        name:  val('name'),
+        email: val('email'),
+        phone: val('phone'),
+        agency: val('agency'),
+        regid: val('regid'),
+        city:  val('city'),
+        about: val('about'),
+      };
+
+      payload.message = [
+        `Name: ${payload.name}`,
+        `Email: ${payload.email}`,
+        `Phone: ${payload.phone}`,
+        `Agency: ${payload.agency}`,
+        `RegID/RERA: ${payload.regid}`,
+        `City: ${payload.city}`,
+        '',
+        'About:',
+        payload.about
+      ].join('\n');
+
+      dbg.textContent = 'Preview (sent to Web3Forms):\n' + JSON.stringify(payload, null, 2);
+
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      box.className = 'hidden mt-3 rounded-xl border px-4 py-3 text-sm';
+      box.textContent = '';
+
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json();
+
+        if (json.success) {
+          box.textContent = 'Thanks! Your application was sent. We’ll reach out shortly.';
+          box.classList.remove('hidden');
+          box.classList.add('border-green-200', 'bg-green-50', 'text-green-700');
+          form.reset();
+        } else {
+          throw new Error(json.message || 'Submission failed.');
+        }
+      } catch (err) {
+        console.error('Web3Forms error:', err);
+        box.textContent = 'Oops, something went wrong. Please try again or email us.';
+        box.classList.remove('hidden');
+        box.classList.add('border-red-200', 'bg-red-50', 'text-red-700');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>

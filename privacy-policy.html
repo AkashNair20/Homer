@@ -1,179 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" type="image/png" sizes="32x32" href="homer_favicon_32.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="homer_favicon_512.png">
-  <title>Privacy Policy – Homer</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms, Privacy & Refund — Homer</title>
+  <meta name="description" content="Homer website Terms & Conditions, Privacy Policy, Contact, and Refund Policy." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a'
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      line-height: 1.7;
-      background-color: #f0f6fc;
-      color: #333;
-    }
-
-    .logo {
-      display: block;
-      margin: 10px auto 5px auto;
-      max-width: 120px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #1565c0;
-      font-size: 2rem;
-      margin-bottom: 10px;
-      margin-top: 5px; 
-    }
-
-    p.intro {
-      text-align: center;
-      color: #555;
-      font-size: 1.05rem;
-      margin-bottom: 30px;
-    }
-
-    .section {
-      background: #ffffff;
-      padding: 20px 25px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    }
-
-    h2 {
-      color: #1565c0;
-      margin-top: 0;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    a {
-      color: #1565c0;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .contact-email {
-      font-weight: bold;
-      color: #0d47a1;
-      background: #e3f2fd;
-      padding: 6px 10px;
-      border-radius: 6px;
-      display: inline-block;
-    }
+    /* Optional: nicer anchor target offset for fixed header */
+    :target::before { content: ""; display: block; height: 90px; margin-top: -90px; }
   </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-200">
+    <div class="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="h-8 w-8 rounded-xl bg-brand-600 shadow-sm"></div>
+        <span class="font-display text-xl tracking-tight">Homer<span class="align-super text-[10px] ml-0.5">™</span></span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-6 text-sm">
+        <a href="#terms" class="hover:text-brand-700">Terms</a>
+        <a href="#privacy" class="hover:text-brand-700">Privacy</a>
+        <a href="#refund" class="hover:text-brand-700">Refunds</a>
+        <a href="#contact" class="hover:text-brand-700">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-  <!-- Logo -->
-  <img src="app_icon_transparent.png" alt="Homer Logo" class="logo">
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-white to-slate-50">
+    <div class="mx-auto max-w-5xl px-4 py-10 sm:py-14">
+      <h1 class="font-display text-3xl sm:text-4xl font-bold">Terms & Policies</h1>
+      <p class="mt-2 text-slate-600">This page consolidates our Terms & Conditions, Privacy Policy, Refund Policy, and Contact information.</p>
+      <p class="mt-3 text-xs text-slate-500">Managed by <strong>NAIR AKASH</strong> • Last updated: <time datetime="2025-10-13">October 13, 2025</time> (IST)</p>
 
-  <h1>Privacy Policy</h1>
-  <p class="intro">
-    Effective Date: 28/09/2025 &nbsp; | &nbsp; Last Updated: 28/09/2025
-  </p>
+      <!-- Quick links -->
+      <div class="mt-6 grid sm:grid-cols-2 gap-3">
+        <a href="#terms" class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition">
+          <span class="block font-semibold">Terms & Conditions</span>
+          <span class="block text-sm text-slate-600">Your agreement to use our website and services.</span>
+        </a>
+        <a href="#privacy" class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition">
+          <span class="block font-semibold">Privacy Policy</span>
+          <span class="block text-sm text-slate-600">How we collect, use, store, and protect data.</span>
+        </a>
+        <a href="#refund" class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition">
+          <span class="block font-semibold">Refund Policy</span>
+          <span class="block text-sm text-slate-600">When and how refunds are processed.</span>
+        </a>
+        <a href="#contact" class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition">
+          <span class="block font-semibold">Contact Us</span>
+          <span class="block text-sm text-slate-600">How to reach our team.</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <div class="section">
-    <h2>1. Information We Collect</h2>
-    <ul>
-      <li>Phone number (for login and identification)</li>
-      <li>Name, flat details, and PIN code</li>
-      <li>Optional UPI ID for rent tracking</li>
-      <li>Device data and crash analytics (anonymized)</li>
-    </ul>
-  </div>
+  <!-- Content -->
+  <main class="mx-auto max-w-5xl px-4 pb-16">
+    <!-- Terms & Conditions -->
+    <section id="terms" class="scroll-mt-24">
+      <div class="rounded-3xl bg-white border border-slate-200 shadow-sm p-6 sm:p-8">
+        <h2 class="font-display text-2xl font-semibold">Terms & Conditions</h2>
+        <p class="mt-2 text-sm text-slate-500">Managed by <strong>NAIR AKASH</strong></p>
+        <div class="prose prose-slate max-w-none mt-5">
+          <p><strong>This website is manage by NAIR AKASH</strong></p>
+          <p>Any terms and conditions proposed by You which are in addition to or which conflict with these Terms of Use are expressly rejected by the Platform Owner and shall be of no force or effect. These Terms of Use can be modified at any time without assigning any reason. It is your responsibility to periodically review these Terms of Use to stay informed of updates. For the purpose of these Terms of Use, wherever the context so requires "you", “your” or "user" shall mean any natural or legal person who has agreed to become a user/buyer on the Platform. <strong>ACCESSING, BROWSING OR OTHERWISE USING THE PLATFORM INDICATES YOUR AGREEMENT TO ALL THE TERMS AND CONDITIONS UNDER THESE TERMS OF USE, SO PLEASE READ THE TERMS OF USE CAREFULLY BEFORE PROCEEDING.</strong></p>
+          <p>The use of Platform and/or availing of our Services is subject to the following Terms of Use: To access and use the Services, you agree to provide true, accurate and complete information to us during and after registration, and you shall be responsible for all acts done through the use of your registered account on the Platform.</p>
+          <p>Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials offered on this website or through the Services, for any specific purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.</p>
+          <p>Your use of our Services and the Platform is solely and entirely at your own risk and discretion for which we shall not be liable to you in any manner. You are required to independently assess and ensure that the Services meet your requirements.</p>
+          <p>The contents of the Platform and the Services are proprietary to us and are licensed to us. You will not have any authority to claim any intellectual property rights, title, or interest in its contents. The contents includes and is not limited to the design, layout, look and graphics.</p>
+          <p>You acknowledge that unauthorized use of the Platform and/or the Services may lead to action against you as per these Terms of Use and/or applicable laws.</p>
+          <p>You agree to pay us the charges associated with availing the Services.</p>
+          <p>You agree not to use the Platform and/ or Services for any purpose that is unlawful, illegal or 4 forbidden by these Terms, or Indian or local laws that might apply to you.</p>
+          <p>You agree and acknowledge that website and the Services may contain links to other third party websites. On accessing these links, you will be governed by the terms of use, privacy policy and such other policies of such third party websites. These links are provided for your convenience for provide further information.</p>
+          <p>You understand that upon initiating a transaction for availing the Services you are entering into a legally binding and enforceable contract with the Platform Owner for the Services.</p>
+          <p>You shall indemnify and hold harmless Platform Owner, its affiliates, group companies (as applicable) and their respective officers, directors, agents, and employees, from any claim or demand, or actions including reasonable attorneys’ fees, made by any third party or penalty imposed due to or arising out of Your breach of this Terms of Use, privacy Policy and other Policies, or Your violation of any law, rules or regulations or the rights (including infringement of intellectual property rights) of a third party.</p>
+          <p>In no event will the Platform Owner be liable for any indirect, consequential, incidental, special or punitive damages, including without limitation damages for loss of profits or revenues, business interruption, loss of business opportunities, loss of data or loss of other economic interests, whether in contract, negligence, tort or otherwise, arising from the use of or inability to use the Services, however caused and whether arising in contract, tort, negligence, warranty or otherwise, exceed the amount paid by You for using the Services giving rise to the cause of action or Rupees One Hundred (Rs. 100) whichever is less</p>
+          <p>Notwithstanding anything contained in these Terms of Use, the parties shall not be liable for any failure to perform an obligation under these Terms if performance is prevented or delayed by a force majeure event.</p>
+          <p>These Terms and any dispute or claim relating to it, or its enforceability, shall be governed by and construed in accordance with the laws of India. All disputes arising out of or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts in INDIA</p>
+          <p>All concerns or communications relating to these Terms must be communicated to us using the contact information provided on this website.</p>
+        </div>
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>2. How We Use Your Information</h2>
-    <ul>
-      <li>Verify your identity and allow login</li>
-      <li>Manage and display rental agreements and rental scores</li>
-      <li>Maintain rental history and records</li>
-      <li>Improve our services and app performance</li>
-    </ul>
-  </div>
+    <!-- Privacy Policy -->
+    <section id="privacy" class="scroll-mt-24 mt-10">
+      <div class="rounded-3xl bg-white border border-slate-200 shadow-sm p-6 sm:p-8">
+        <h2 class="font-display text-2xl font-semibold">Privacy Policy</h2>
+        <div class="prose prose-slate max-w-none mt-5">
+          <p>We retain your personal data information for a period no longer than is required for the purpose for which it was collected or as required under any applicable law. However, we may retain data related to 2 you if we believe it may be necessary to prevent fraud or future abuse or for other legitimate purposes. We may continue to retain your data in anonymised form for analytical and research purposes.</p>
+          <p><strong>Your Rights</strong> — You may access, rectify, and update your personal data directly through the functionalities provided on the Platform.</p>
+          <p><strong>Consent</strong> — By visiting our Platform or by providing your information, you consent to the collection, use, storage, disclosure and otherwise processing of your information on the Platform in accordance with this Privacy Policy. If you disclose to us any personal data relating to other people, you represent that you have the authority to do so and permit us to use the information in accordance with this Privacy Policy. You, while providing your personal data over the Platform or any partner platforms or establishments, consent to us (including our other corporate entities, affiliates, lending partners, technology partners, marketing channels, business partners and other third parties) to contact you through SMS, instant messaging apps, call and/or e-mail for the purposes specified in this Privacy Policy.</p>
+          <p>You have an option to withdraw your consent that you have already provided by writing to the Grievance Officer at the contact information provided below. Please mention “Withdrawal of consent for processing personal data” in your subject line of your communication. We may verify such requests before acting on our request. However, please note that your withdrawal of consent will not be retrospective and will be in accordance with the Terms of Use, this Privacy Policy, and applicable laws. In the event you withdraw consent given to us under this Privacy Policy, we reserve the right to restrict or deny the provision of our services for which we consider such information to be necessary.</p>
+          <p><strong>Changes to this Privacy Policy</strong> — Please check our Privacy Policy periodically for changes. We may update this Privacy Policy to reflect changes to our information practices. We may alert / notify you about the significant changes to the Privacy Policy, in the manner as may be required under applicable laws.</p>
+        </div>
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>3. Data Sharing</h2>
-    <p>We do not sell your data. We may share data only with:</p>
-    <ul>
-      <li>Trusted service providers (e.g., Google Firebase for data storage)</li>
-      <li>Third-party tools (e.g., Razorpay if you choose to track rent payments)</li>
-      <li>Legal authorities if required by law</li>
-    </ul>
-  </div>
+    <!-- Refund Policy -->
+    <section id="refund" class="scroll-mt-24 mt-10">
+      <div class="rounded-3xl bg-white border border-slate-200 shadow-sm p-6 sm:p-8">
+        <h2 class="font-display text-2xl font-semibold">Refund Policy</h2>
+        <div class="prose prose-slate max-w-none mt-5">
+          <p>If approved then refund will be credited to the original payment method within 7 days.</p>
+        </div>
+      </div>
+    </section>
 
-  <div class="section">
-    <h2>4. Third-Party Services</h2>
-    <p>Homer uses the following third-party services, which have their own privacy policies:</p>
-    <ul>
-      <li><a href="https://firebase.google.com/support/privacy" target="_blank">Google Firebase Privacy Policy</a></li>
-      <li><a href="https://razorpay.com/privacy/" target="_blank">Razorpay Privacy Policy</a></li>
-    </ul>
-  </div>
+    <!-- Contact -->
+    <section id="contact" class="scroll-mt-24 mt-10">
+      <div class="rounded-3xl bg-white border border-slate-200 shadow-sm p-6 sm:p-8">
+        <h2 class="font-display text-2xl font-semibold">Contact Us</h2>
+        <div class="prose prose-slate max-w-none mt-5">
+          <p><strong>Phone:</strong> <a href="tel:+917802825493" class="text-brand-700 hover:underline">7802825493</a><br>
+             <strong>Email:</strong> <a href="mailto:akashnair9180@gmail.com" class="text-brand-700 hover:underline">akashnair9180@gmail.com</a>
+          </p>
+          <p>All concerns or communications relating to these Terms must be sent using the contact information above.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <div class="section">
-    <h2>5. Data Storage and Security</h2>
-    <ul>
-      <li>Your data is securely stored on Google Firebase servers</li>
-      <li>We use encryption and restricted access controls to protect your information</li>
-    </ul>
-  </div>
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-5xl px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-500">© <span id="y"></span> Homer. All rights reserved.</p>
+      <div class="flex gap-4 text-sm">
+        <a href="#terms" class="hover:text-brand-700">Terms</a>
+        <span class="text-slate-300">•</span>
+        <a href="#privacy" class="hover:text-brand-700">Privacy</a>
+        <span class="text-slate-300">•</span>
+        <a href="#refund" class="hover:text-brand-700">Refunds</a>
+        <span class="text-slate-300">•</span>
+        <a href="#contact" class="hover:text-brand-700">Contact</a>
+      </div>
+    </div>
+  </footer>
 
-  <div class="section">
-    <h2>6. User Rights</h2>
-    <p>You may:</p>
-    <ul>
-      <li>Request to view, correct, or delete your personal data</li>
-      <li>Contact us at <span class="contact-email">support@homer.co.in</span> for any requests</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>7. Children's Privacy</h2>
-    <p>Homer is not intended for users under 13. We do not knowingly collect personal data from children.</p>
-  </div>
-
-  <div class="section">
-    <h2>8. Changes to This Policy</h2>
-    <p>We may update this policy periodically. Continued use of the app after updates implies acceptance of the revised terms.</p>
-  </div>
-
-  <div class="section">
-    <h2>9. Consent</h2>
-    <p>By using Homer, you agree to this Privacy Policy and consent to the collection and use of your information as described.</p>
-  </div>
-
-  <!-- NEW: Refund Policy -->
-  <div class="section">
-    <h2>10. Refund Policy</h2>
-    <p>
-      If a payment is charged in error or otherwise processed incorrectly within Homer, the full amount will be refunded to the renter.
-      Refunds are initiated after a basic review to confirm the issue. Timing for funds to appear back in your account may vary based on
-      your bank or payment partner. For assistance, please reach us at <span class="contact-email">support@homer.co.in</span>.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>11. Contact Us</h2>
-    <p>If you have any questions, contact us at:</p>
-    <p><span class="contact-email">support@homer.co.in</span></p>
-  </div>
-
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
